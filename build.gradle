@@ -1,8 +1,10 @@
 buildscript {
-    mavenLocal()
-    maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
-    jcenter()
-    mavenCentral()
+    repositories {
+        mavenLocal()
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+        jcenter()
+        mavenCentral()
+    }
 
 
     dependencies {
@@ -50,14 +52,14 @@ subprojects {
     }
 }
 
-project(':ee/ee-asm') {
+project(':ee:ee-asm') {
     dependencies {
-        compile project(':ee/ee-common')
+        compile project(':ee:ee-common')
         compile "org.ow2.asm:asm-debug-all:${version_asm}"
     }
 }
 
-project(':ee/ee-axon_example') {
+project(':ee:ee-axon_example') {
     apply plugin: 'org.springframework.boot'
 
     repositories {
@@ -76,94 +78,94 @@ project(':ee/ee-axon_example') {
     }
 }
 
-project(':ee/ee-lang_item') {
+project(':ee:ee-lang_item') {
     dependencies {
-        compile project(':ee/ee-common')
+        compile project(':ee:ee-common')
         compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
     }
 }
 
-project(':ee/ee-design') {
+project(':ee:ee-design') {
     dependencies {
-        compile project(':ee/ee-lang')
+        compile project(':ee:ee-lang')
     }
 }
 
-project(':ee/ee-design_gen') {
+project(':ee:ee-design_gen') {
     dependencies {
-        compile project(':ee/ee-lang')
+        compile project(':ee:ee-lang')
     }
 }
 
-project(':ee/ee-design_ui') {
+project(':ee:ee-design_ui') {
     dependencies {
-        compile project(':ee/ee-design')
+        compile project(':ee:ee-design')
     }
 }
 
-project(':ee/ee-design_ui_des') {
+project(':ee:ee-design_ui_des') {
     dependencies {
-        compile project(':ee/ee-design')
-        compile project(':ee/ee-asm')
+        compile project(':ee:ee-design')
+        compile project(':ee:ee-asm')
     }
 }
 
-project(':ee/ee-design_ui_des_asm') {
+project(':ee:ee-design_ui_des_asm') {
     dependencies {
-        compile project(':ee/ee-design')
-        compile project(':ee/ee-asm')
+        compile project(':ee:ee-design')
+        compile project(':ee:ee-asm')
     }
 }
 
-project(':ee/ee-lang') {
+project(':ee:ee-lang') {
     dependencies {
-        compile project(':ee/ee-lang_item')
+        compile project(':ee:ee-lang_item')
     }
 }
 
-project(':ee/ee-lang_gen') {
+project(':ee:ee-lang_gen') {
     dependencies {
-        compile project(':ee/ee-lang_item')
+        compile project(':ee:ee-lang_item')
     }
 }
 
-project(':ee/ee-task') {
+project(':ee:ee-task') {
     dependencies {
-        compile project(':ee/ee-lang')
+        compile project(':ee:ee-lang')
     }
 }
 
-project(':ee/ee-task_des') {
+project(':ee:ee-task_des') {
     dependencies {
-        compile project(':ee/ee-design')
+        compile project(':ee:ee-design')
     }
 }
 
-project(':ee/ee-system_des') {
+project(':ee:ee-system_des') {
     dependencies {
-        compile project(':ee/ee-task_des')
+        compile project(':ee:ee-task_des')
     }
 }
 
-project(':ee/ee-system') {
+project(':ee:ee-system') {
     dependencies {
-        compile project(':ee/ee-task')
+        compile project(':ee:ee-task')
     }
 }
 
-project(':ee/ee-design_task') {
+project(':ee:ee-design_task') {
     dependencies {
-        compile project(':ee/ee-design')
-        compile project(':ee/ee-system')
+        compile project(':ee:ee-design')
+        compile project(':ee:ee-system')
     }
 }
 
-project(':ee/ee-lang_fx') {
+project(':ee:ee-lang_fx') {
     apply plugin: 'application'
     mainClassName = 'ee.lang.fx.ModelApp'
 
     dependencies {
-        compile project(':ee/ee-design_task')
+        compile project(':ee:ee-design_task')
         compile "no.tornado:tornadofx:$version_tornadofx"
     }
 
@@ -178,31 +180,31 @@ project(':ee/ee-lang_fx') {
     }
 }
 
-project(':ee-slides/ee-slides_des') {
+project(':ee-slides:ee-slides_des') {
     dependencies {
-        compile project(':ee/ee-design')
+        compile project(':ee:ee-design')
     }
 }
 
-project(':ee-slides/ee-slides') {
+project(':ee-slides:ee-slides') {
     dependencies {
-        compile project(':ee/ee-common')
+        compile project(':ee:ee-common')
     }
 }
 
-project(':ee-slides/ee-slides_json') {
+project(':ee-slides:ee-slides_json') {
     dependencies {
-        compile project(':ee-slides/ee-slides')
+        compile project(':ee-slides:ee-slides')
         compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
     }
 }
 
-project(':ee-slides/ee-slides_fx') {
+project(':ee-slides:ee-slides_fx') {
     apply plugin: 'application'
     mainClassName = 'ee.slides.fx.SlidesApp'
 
     dependencies {
-        compile project(':ee-slides/ee-slides_json')
+        compile project(':ee-slides:ee-slides_json')
         compile "no.tornado:tornadofx:$version_tornadofx"
         compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
     }
@@ -218,88 +220,88 @@ project(':ee-slides/ee-slides_fx') {
     }
 }
 
-project(':ee-timeline/ee-timeline_des') {
+project(':ee-timeline:ee-timeline_des') {
     dependencies {
-        compile project(':ee/ee-design')
+        compile project(':ee:ee-design')
     }
 }
 
-project(':ee-timeline/ee-timeline') {
+project(':ee-timeline:ee-timeline') {
     dependencies {
-        compile project(':ee/ee-common')
+        compile project(':ee:ee-common')
     }
 }
 
-project(':ee-timeline/ee-timeline_json') {
+project(':ee-timeline:ee-timeline_json') {
     dependencies {
-        compile project(':ee-timeline/ee-timeline')
+        compile project(':ee-timeline:ee-timeline')
         compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
     }
 }
 
-project(':ee-elastic/ee-elastic') {
+project(':ee-elastic:ee-elastic') {
     apply plugin: 'application'
     apply plugin: 'kotlin'
 
     mainClassName = "ee.es.ExportMainKt"
 
     dependencies {
-        compile project(':ee/ee-common')
+        compile project(':ee:ee-common')
         compile "uy.klutter:klutter-elasticsearch-jdk7:$version_klutter"
     }
 }
 
-project(':ee-office/ee-excel') {
+project(':ee-office:ee-excel') {
     dependencies {
-        compile project(':ee/ee-common')
-        compile project(':ee/ee-design')
+        compile project(':ee:ee-common')
+        compile project(':ee:ee-design')
 
         compile 'org.apache.poi:poi-ooxml:3.13'
     }
 }
 
-project(':ee-office/ee-msaccess') {
+project(':ee-office:ee-msaccess') {
     dependencies {
-        compile project(':ee/ee-common')
+        compile project(':ee:ee-common')
         compile 'com.healthmarketscience.jackcess:jackcess:2.1.4'
 
-        testCompile project(':ee/ee-design')
+        testCompile project(':ee:ee-design')
     }
 }
 
-project(':ee-office/ee-powerpoint') {
+project(':ee-office:ee-powerpoint') {
     dependencies {
-        compile project(':ee/ee-common')
-        compile project(':ee/ee-design')
-        compile project(':ee-slides/ee-slides_json')
+        compile project(':ee:ee-common')
+        compile project(':ee:ee-design')
+        compile project(':ee-slides:ee-slides_json')
 
         compile 'org.apache.poi:poi-ooxml:3.13'
     }
 }
 
-project(':ee-email/ee-email') {
+project(':ee-email:ee-email') {
     dependencies {
-        compile project(':ee/ee-common')
+        compile project(':ee:ee-common')
         compile "javax.mail:javax.mail-api:$version_mail"
     }
 }
 
-project(':ee-email/ee-email_des') {
+project(':ee-email:ee-email_des') {
     dependencies {
-        compile project(':ee/ee-design')
+        compile project(':ee:ee-design')
     }
 }
 
-project(':ee-email/ee-email_excel') {
+project(':ee-email:ee-email_excel') {
     dependencies {
-        compile project(':ee-email/ee-email')
-        compile project(':ee-office/ee-excel')
+        compile project(':ee-email:ee-email')
+        compile project(':ee-office:ee-excel')
     }
 }
 
-project(':ee-grab/ee-grab') {
+project(':ee-grab:ee-grab') {
     dependencies {
-        compile project(':ee/ee-common')
+        compile project(':ee:ee-common')
         compile "org.seleniumhq.selenium:selenium-api:$version_selenium"
         compile "org.seleniumhq.selenium:selenium-firefox-driver:$version_selenium"
         compile "org.seleniumhq.selenium:selenium-chrome-driver:$version_selenium"
@@ -308,28 +310,28 @@ project(':ee-grab/ee-grab') {
     }
 
 }
-project(':ee-grab/ee-fiveh') {
+project(':ee-grab:ee-fiveh') {
     dependencies {
-        compile project(':ee-grab/ee-grab')
-        compile project(':ee-email/ee-email')
+        compile project(':ee-grab:ee-grab')
+        compile project(':ee-email:ee-email')
     }
 }
-project(':ee-grab/ee-rulit') {
+project(':ee-grab:ee-rulit') {
     dependencies {
-        compile project(':ee-grab/ee-grab')
+        compile project(':ee-grab:ee-grab')
     }
 }
-project(':ee-grab/ee-moodle') {
+project(':ee-grab:ee-moodle') {
     dependencies {
-        compile project(':ee-grab/ee-grab')
+        compile project(':ee-grab:ee-grab')
     }
 }
-project(':ee-grab/ee-moodle_fx') {
+project(':ee-grab:ee-moodle_fx') {
     apply plugin: 'application'
     mainClassName = 'ee.moodle.fx.MoodleApp'
 
     dependencies {
-        compile project(':ee-grab/ee-moodle')
+        compile project(':ee-grab:ee-moodle')
         compile "no.tornado:tornadofx:$version_tornadofx"
     }
 
@@ -344,7 +346,7 @@ project(':ee-grab/ee-moodle_fx') {
     }
 
     task copyDrivers(type: Copy) {
-        from "$buildDir/../../ee-grab/drivers"
+        from "$buildDir/../..:ee-grab/drivers"
         into "$buildDir/drivers"
     }
 
@@ -359,34 +361,34 @@ project(':ee-grab/ee-moodle_fx') {
     }
 }
 
-project(':ee-grab/ee-unisa') {
+project(':ee-grab:ee-unisa') {
     dependencies {
-        compile project(':ee-grab/ee-grab')
+        compile project(':ee-grab:ee-grab')
     }
 }
 
-project(':ee-grab/ee-brill') {
+project(':ee-grab:ee-brill') {
     dependencies {
-        compile project(':ee-grab/ee-grab')
+        compile project(':ee-grab:ee-grab')
     }
 }
 
-project(':ee-schkola/ee-schkola') {
+project(':ee-schkola:ee-schkola') {
     dependencies {
-        compile project(':ee/ee-common')
+        compile project(':ee:ee-common')
 
-        testCompile project(':ee-grab/ee-fiveh')
-        testCompile project(':ee-office/ee-msaccess')
-        testCompile project(':ee-email/ee-email_excel')
+        testCompile project(':ee-grab:ee-fiveh')
+        testCompile project(':ee-office:ee-msaccess')
+        testCompile project(':ee-email:ee-email_excel')
     }
 }
-project(':ee-schkola/ee-schkola_fx') {
+project(':ee-schkola:ee-schkola_fx') {
     apply plugin: 'application'
 
     dependencies {
-        compile project(':ee/ee-common')
-        compile project(':ee/ee-design')
-        compile project(':ee-schkola/ee-schkola')
+        compile project(':ee:ee-common')
+        compile project(':ee:ee-design')
+        compile project(':ee-schkola:ee-schkola')
         compile "no.tornado:tornadofx:$version_tornadofx"
     }
 
@@ -402,67 +404,28 @@ project(':ee-schkola/ee-schkola_fx') {
 
     mainClassName = "ee.schkola.fx.app.MyApp"
 }
-project(':ee-schkola/ee-schkola_des') {
+project(':ee-schkola:ee-schkola_des') {
     dependencies {
-        compile project(':ee/ee-common')
-        compile project(':ee/ee-design')
-        compile project(':ee/ee-system')
+        compile project(':ee:ee-common')
+        compile project(':ee:ee-design')
+        compile project(':ee:ee-system')
     }
 }
-project(':ee-schkola/ee-schkola_des_fx') {
+project(':ee-schkola:ee-schkola_des_fx') {
     dependencies {
-        compile project(':ee-schkola/ee-schkola_des')
-        compile project(':ee/ee-lang_fx')
+        compile project(':ee-schkola:ee-schkola_des')
+        compile project(':ee:ee-lang_fx')
     }
 }
-project(':ee-schkola/ee-schkola_groovy') {
+project(':ee-schkola:ee-schkola_groovy') {
     apply plugin: "groovy"
 
     dependencies {
-        compile project(':ee/ee-common')
-        compile project(':ee-schkola/ee-schkola')
-        compile project(':ee-office/ee-msaccess')
+        compile project(':ee:ee-common')
+        compile project(':ee-schkola:ee-schkola')
+        compile project(':ee-office:ee-msaccess')
         compile 'org.codehaus.groovy:groovy-all:2.4.7'
 
-        testCompile project(':ee/ee-design')
+        testCompile project(':ee:ee-design')
     }
 }
-
-project(':cg/cg') {
-    dependencies {
-        compile project(':ee/ee-common')
-    }
-}
-project(':cg/cg_des') {
-    dependencies {
-        compile project(':ee/ee-common')
-        compile project(':ee/ee-design')
-        compile project(':ee/ee-system')
-    }
-}
-project(':cg/cg_fx') {
-    apply plugin: 'application'
-    mainClassName = 'cg.ee.fx.CgApp'
-
-    dependencies {
-        compile project(':ee/ee-lang_fx')
-        compile project(':cg/cg_des')
-        compile "no.tornado:tornadofx:$version_tornadofx"
-    }
-
-    jar {
-        manifest {
-            attributes(
-                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-                    'Main-Class': 'cg.ee.fx.CgApp'
-            )
-        }
-        from configurations.compile.collect { entry -> zipTree(entry) }
-    }
-}
-
-
-
-
-
-
