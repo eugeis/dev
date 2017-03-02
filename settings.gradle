@@ -6,7 +6,7 @@ include 'ee:ee-common', 'ee:ee-lang_item', 'ee:ee-lang_gen', 'ee:ee-lang',
         'ee:ee-design_task', 'ee:ee-lang_fx',
         'ee:ee-axon_example'
 include 'ee-slides:ee-slides_des', 'ee-slides:ee-slides', 'ee-slides:ee-slides_json', 'ee-slides:ee-slides_fx'
-include 'ee-timeline:ee-timeline_des', 'ee-timeline:ee-timeline', 'ee-timeline:ee-timeline_json'
+include 'ee-timeline:ee-timeline_des', 'ee-timeline:ee-timeline', 'ee-timeline:ee-timeline_json', 'ee-timeline:ee-timeline_excel'
 include 'ee-elastic:ee-elastic'
 include 'ee-office:ee-excel', 'ee-office:ee-powerpoint', 'ee-office:ee-msaccess'
 include 'ee-email:ee-email', 'ee-email:ee-email_des', 'ee-email:ee-email_excel'

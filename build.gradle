@@ -13,7 +13,7 @@ buildscript {
     }
 }
 
-task wrapper(type: Wrapper) { gradleVersion = '2.14' }
+task wrapper(type: Wrapper) { gradleVersion = '3.4' }
 
 allprojects {
     group = 'ee'
@@ -239,6 +239,14 @@ project(':ee-timeline:ee-timeline_json') {
     }
 }
 
+project(':ee-timeline:ee-timeline_excel') {
+    dependencies {
+        compile project(':ee-timeline:ee-timeline')
+        compile project(':ee-timeline:ee-timeline_json')
+        compile project(':ee-office:ee-excel')
+    }
+}
+
 project(':ee-elastic:ee-elastic') {
     apply plugin: 'application'
     apply plugin: 'kotlin'
@@ -247,7 +255,10 @@ project(':ee-elastic:ee-elastic') {
 
     dependencies {
         compile project(':ee:ee-common')
-        compile "uy.klutter:klutter-elasticsearch-jdk7:$version_klutter"
+        compile "org.elasticsearch.client:transport:$version_elasticsearch"
+        compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
+        compile "mbuhot:eskotlin:$version_eskotlin"
+
     }
 }
 
@@ -429,3 +440,8 @@ project(':ee-schkola:ee-schkola_groovy') {
         testCompile project(':ee:ee-design')
     }
 }
+
+
+
+
+
