@@ -30,6 +30,10 @@ subprojects {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
+    compileKotlin {
+        kotlinOptions.jvmTarget = '1.8'
+    }
+
     sourceSets {
         main {
             kotlin.srcDirs = ['src/main/kotlin', 'src-gen/main/kotlin']
