@@ -262,7 +262,7 @@ project(':ee-elastic:ee-elastic') {
         compile "org.elasticsearch.client:transport:$version_elasticsearch"
         compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
         compile "mbuhot:eskotlin:$version_eskotlin"
-
+        runtime "org.apache.logging.log4j:log4j-core:$version_log4j"
     }
 }
 
