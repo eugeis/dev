@@ -273,14 +273,14 @@ project(':ee-office:ee-excel'){
         compile project(':ee:ee-common')
         compile project(':ee:ee-design')
 
-        compile 'org.apache.poi:poi-ooxml:3.13'
+        compile "org.apache.poi:poi-ooxml:$version_ooxml"
     }
 }
 
 project(':ee-office:ee-msaccess'){
     dependencies {
         compile project(':ee:ee-common')
-        compile 'com.healthmarketscience.jackcess:jackcess:2.1.4'
+        compile "com.healthmarketscience.jackcess:jackcess:$version_jackcess"
 
         testCompile project(':ee:ee-design')
     }
@@ -292,7 +292,16 @@ project(':ee-office:ee-powerpoint'){
         compile project(':ee:ee-design')
         compile project(':ee-slides:ee-slides_json')
 
-        compile 'org.apache.poi:poi-ooxml:3.13'
+        compile "org.apache.poi:poi-ooxml:$version_ooxml"
+    }
+}
+
+project(':ee-office:ee-word'){
+    dependencies {
+        compile project(':ee:ee-common')
+        compile project(':ee:ee-design')
+
+        compile "org.apache.poi:poi-ooxml:$version_ooxml"
     }
 }
 
