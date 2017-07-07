@@ -302,6 +302,7 @@ project(':ee-office:ee-word'){
         compile project(':ee:ee-design')
 
         compile "org.apache.poi:poi-ooxml:$version_ooxml"
+        compile "org.apache.poi:poi-scratchpad:$version_poi_scratchpad"
     }
 }
 
