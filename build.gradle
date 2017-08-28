@@ -3,6 +3,7 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
         jcenter()
         mavenCentral()
     }
@@ -53,6 +54,7 @@ subprojects {
     repositories {
         mavenLocal()
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
         jcenter()
         mavenCentral()
     }
