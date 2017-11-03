@@ -478,3 +478,15 @@ project(':ee-schkola:ee-schkola_groovy'){
         testCompile project(':ee:ee-design')
     }
 }
+
+
+project(':rfc1006:rfc1006'){
+    dependencies {
+    }
+}
+
+project(':rfc1006:rfc1006_des'){
+    dependencies {
+        compile project(':ee:ee-design')
+    }
+}
