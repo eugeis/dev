@@ -74,7 +74,7 @@ project(':ee:ee-common') {
 project(':ee:ee-asm') {
     dependencies {
         compile project(':ee:ee-common')
-        compile "org.ow2.asm:asm-debug-all:${version_asm}"
+        compile "org.ow2.asm:asm:${version_asm}"
     }
 }
 
