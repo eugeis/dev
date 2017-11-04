@@ -24,15 +24,14 @@ allprojects {
 }
 
 subprojects {
-    apply plugin: "java"
     apply plugin: "kotlin"
     apply plugin: 'maven'
     apply plugin: 'maven-publish'
     apply plugin: 'idea'
     apply plugin: 'eclipse'
 
-	sourceCompatibility = 1.8
-	targetCompatibility = 1.8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
     compileKotlin {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -81,6 +80,7 @@ project(':ee:ee-asm') {
     dependencies {
         compile project(':ee:ee-common')
         compile "org.ow2.asm:asm:${version_asm}"
+        compile "org.ow2.asm:asm-tree:${version_asm}"
     }
 }
 
@@ -106,7 +106,9 @@ project(':ee:ee-axon_example') {
 project(':ee:ee-lang_item') {
     dependencies {
         compile project(':ee:ee-common')
-        compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson" ) {
+            exclude module: "kotlin-reflect"
+        }
     }
 }
 
@@ -169,6 +171,7 @@ project(':ee:ee-task_des') {
 project(':ee:ee-system_des') {
     dependencies {
         compile project(':ee:ee-task_des')
+        compile "org.jetbrains.kotlin:kotlin-reflect:${version_kotlin}"
     }
 }
 
@@ -191,7 +194,10 @@ project(':ee:ee-lang_fx') {
 
     dependencies {
         compile project(':ee:ee-design_task')
-        compile "no.tornado:tornadofx:$version_tornadofx"
+        compile("no.tornado:tornadofx:$version_tornadofx") {
+            exclude module: "kotlin-stdlib-jre8"
+            exclude module: "kotlin-reflect"
+        }
     }
 
     jar {
@@ -205,22 +211,24 @@ project(':ee:ee-lang_fx') {
     }
 }
 
-project(':ee-slides:ee-slides_des'){
+project(':ee-slides:ee-slides_des') {
     dependencies {
         compile project(':ee:ee-design')
     }
 }
 
-project(':ee-slides:ee-slides'){
+project(':ee-slides:ee-slides') {
     dependencies {
         compile project(':ee:ee-common')
     }
 }
 
-project(':ee-slides:ee-slides_json'){
+project(':ee-slides:ee-slides_json') {
     dependencies {
         compile project(':ee-slides:ee-slides')
-        compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson" ) {
+            exclude module: "kotlin-reflect"
+        }
     }
 }
 
@@ -230,8 +238,10 @@ project(':ee-slides:ee-slides_fx') {
 
     dependencies {
         compile project(':ee-slides:ee-slides_json')
-        compile "no.tornado:tornadofx:$version_tornadofx"
-        compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
+        compile("no.tornado:tornadofx:$version_tornadofx") {
+            exclude module: "kotlin-stdlib-jre8"
+            exclude module: "kotlin-reflect"
+        }
     }
 
     jar {
@@ -245,22 +255,24 @@ project(':ee-slides:ee-slides_fx') {
     }
 }
 
-project(':ee-timeline:ee-timeline_des'){
+project(':ee-timeline:ee-timeline_des') {
     dependencies {
         compile project(':ee:ee-design')
     }
 }
 
-project(':ee-timeline:ee-timeline'){
+project(':ee-timeline:ee-timeline') {
     dependencies {
         compile project(':ee:ee-common')
     }
 }
 
-project(':ee-timeline:ee-timeline_json'){
+project(':ee-timeline:ee-timeline_json') {
     dependencies {
         compile project(':ee-timeline:ee-timeline')
-        compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson" ) {
+            exclude module: "kotlin-reflect"
+        }
     }
 }
 
@@ -281,13 +293,15 @@ project(':ee-elastic:ee-elastic') {
     dependencies {
         compile project(':ee:ee-common')
         compile "org.elasticsearch.client:transport:$version_elasticsearch"
-        compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson" ) {
+            exclude module: "kotlin-reflect"
+        }
         compile "mbuhot:eskotlin:$version_eskotlin"
         runtime "org.apache.logging.log4j:log4j-core:$version_log4j"
     }
 }
 
-project(':ee-office:ee-excel'){
+project(':ee-office:ee-excel') {
     dependencies {
         compile project(':ee:ee-common')
         compile project(':ee:ee-design')
@@ -296,7 +310,7 @@ project(':ee-office:ee-excel'){
     }
 }
 
-project(':ee-office:ee-msaccess'){
+project(':ee-office:ee-msaccess') {
     dependencies {
         compile project(':ee:ee-common')
         compile "com.healthmarketscience.jackcess:jackcess:$version_jackcess"
@@ -305,7 +319,7 @@ project(':ee-office:ee-msaccess'){
     }
 }
 
-project(':ee-office:ee-powerpoint'){
+project(':ee-office:ee-powerpoint') {
     dependencies {
         compile project(':ee:ee-common')
         compile project(':ee:ee-design')
@@ -315,7 +329,7 @@ project(':ee-office:ee-powerpoint'){
     }
 }
 
-project(':ee-office:ee-word'){
+project(':ee-office:ee-word') {
     dependencies {
         compile project(':ee:ee-common')
         compile project(':ee:ee-design')
@@ -325,27 +339,27 @@ project(':ee-office:ee-word'){
     }
 }
 
-project(':ee-email:ee-email'){
+project(':ee-email:ee-email') {
     dependencies {
         compile project(':ee:ee-common')
         compile "javax.mail:javax.mail-api:$version_mail"
     }
 }
 
-project(':ee-email:ee-email_des'){
+project(':ee-email:ee-email_des') {
     dependencies {
         compile project(':ee:ee-design')
     }
 }
 
-project(':ee-email:ee-email_excel'){
+project(':ee-email:ee-email_excel') {
     dependencies {
         compile project(':ee-email:ee-email')
         compile project(':ee-office:ee-excel')
     }
 }
 
-project(':ee-office:ee-word'){
+project(':ee-office:ee-word') {
     dependencies {
         compile project(':ee:ee-common')
         compile project(':ee:ee-design')
@@ -365,29 +379,32 @@ project(':ee-grab:ee-grab') {
     }
 
 }
-project(':ee-grab:ee-fiveh'){
+project(':ee-grab:ee-fiveh') {
     dependencies {
         compile project(':ee-grab:ee-grab')
         compile project(':ee-email:ee-email')
     }
 }
-project(':ee-grab:ee-rulit'){
+project(':ee-grab:ee-rulit') {
     dependencies {
         compile project(':ee-grab:ee-grab')
     }
 }
-project(':ee-grab:ee-moodle'){
+project(':ee-grab:ee-moodle') {
     dependencies {
         compile project(':ee-grab:ee-grab')
     }
 }
-project(':ee-grab:ee-moodle_fx'){
+project(':ee-grab:ee-moodle_fx') {
     apply plugin: 'application'
     mainClassName = 'ee.moodle.fx.MoodleApp'
 
     dependencies {
         compile project(':ee-grab:ee-moodle')
-        compile "no.tornado:tornadofx:$version_tornadofx"
+        compile("no.tornado:tornadofx:$version_tornadofx") {
+            exclude module: "kotlin-stdlib-jre8"
+            exclude module: "kotlin-reflect"
+        }
     }
 
     jar {
@@ -401,7 +418,7 @@ project(':ee-grab:ee-moodle_fx'){
     }
 
     task copyDrivers(type: Copy) {
-        from "$buildDir/../../ee-grab/drivers"
+        from "$buildDir/../..:ee-grab/drivers"
         into "$buildDir/drivers"
     }
 
@@ -416,19 +433,19 @@ project(':ee-grab:ee-moodle_fx'){
     }
 }
 
-project(':ee-grab:ee-unisa'){
+project(':ee-grab:ee-unisa') {
     dependencies {
         compile project(':ee-grab:ee-grab')
     }
 }
 
-project(':ee-grab:ee-brill'){
-     dependencies {
-         compile project(':ee-grab:ee-grab')
-     }
+project(':ee-grab:ee-brill') {
+    dependencies {
+        compile project(':ee-grab:ee-grab')
+    }
 }
 
-project(':ee-schkola:ee-schkola'){
+project(':ee-schkola:ee-schkola') {
     dependencies {
         compile project(':ee:ee-common')
 
@@ -437,14 +454,17 @@ project(':ee-schkola:ee-schkola'){
         testCompile project(':ee-email:ee-email_excel')
     }
 }
-project(':ee-schkola:ee-schkola_fx'){
+project(':ee-schkola:ee-schkola_fx') {
     apply plugin: 'application'
 
     dependencies {
         compile project(':ee:ee-common')
         compile project(':ee:ee-design')
         compile project(':ee-schkola:ee-schkola')
-        compile "no.tornado:tornadofx:$version_tornadofx"
+        compile("no.tornado:tornadofx:$version_tornadofx") {
+            exclude module: "kotlin-stdlib-jre8"
+            exclude module: "kotlin-reflect"
+        }
     }
 
     jar {
@@ -459,20 +479,20 @@ project(':ee-schkola:ee-schkola_fx'){
 
     mainClassName = "ee.schkola.fx.app.MyApp"
 }
-project(':ee-schkola:ee-schkola_des'){
+project(':ee-schkola:ee-schkola_des') {
     dependencies {
         compile project(':ee:ee-common')
         compile project(':ee:ee-design')
         compile project(':ee:ee-system')
     }
 }
-project(':ee-schkola:ee-schkola_des_fx'){
+project(':ee-schkola:ee-schkola_des_fx') {
     dependencies {
         compile project(':ee-schkola:ee-schkola_des')
         compile project(':ee:ee-lang_fx')
     }
 }
-project(':ee-schkola:ee-schkola_groovy'){
+project(':ee-schkola:ee-schkola_groovy') {
     apply plugin: "groovy"
 
     dependencies {
@@ -485,14 +505,16 @@ project(':ee-schkola:ee-schkola_groovy'){
     }
 }
 
-
-project(':rfc1006:rfc1006'){
+project(':rfc1006:rfc1006') {
     dependencies {
     }
 }
 
-project(':rfc1006:rfc1006_des'){
+project(':rfc1006:rfc1006_des') {
     dependencies {
         compile project(':ee:ee-design')
     }
 }
+
+
+
