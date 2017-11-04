@@ -1,4 +1,4 @@
-include 'ee:ee-common', 'ee:ee-lang_item', 'ee:ee-lang_gen', 'ee:ee-lang',
+include 'ee:ee-common_java', 'ee:ee-common', 'ee:ee-lang_item', 'ee:ee-lang_gen', 'ee:ee-lang',
         'ee:ee-design_gen', 'ee:ee-design',
         'ee:ee-asm', 'ee:ee-design_ui', 'ee:ee-design_ui_des', 'ee:ee-design_ui_des_asm',
         'ee:ee-task_des', 'ee:ee-task',
