@@ -423,7 +423,7 @@ project(':ee-grab:ee-moodle_fx') {
     }
 
     task copyDrivers(type: Copy) {
-        from "$buildDir/../..:ee-grab/drivers"
+        from "$buildDir/../../ee-grab/drivers"
         into "$buildDir/drivers"
     }
 
@@ -510,7 +510,41 @@ project(':ee-schkola:ee-schkola_groovy') {
     }
 }
 
-project(':rfc1006:rfc1006') {
+project(':cg:cg'){
+    dependencies {
+        compile project(':ee:ee-common')
+    }
+}
+project(':cg:cg_des'){
+    dependencies {
+        compile project(':ee:ee-common')
+        compile project(':ee:ee-design')
+        compile project(':ee:ee-system')
+    }
+}
+project(':cg:cg_fx'){
+    apply plugin: 'application'
+    mainClassName = 'cg.ee.fx.CgApp'
+
+    dependencies {
+        compile project(':ee:ee-lang_fx')
+        compile project(':cg:cg_des')
+        compile "no.tornado:tornadofx:$version_tornadofx"
+    }
+
+    jar {
+        manifest {
+            attributes(
+                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                    'Main-Class': 'cg.ee.fx.CgApp'
+            )
+        }
+        from configurations.compile.collect { entry -> zipTree(entry) }
+    }
+}
+
+
+project(':rfc1006:rfc1006'){
     dependencies {
     }
 }
@@ -520,6 +554,10 @@ project(':rfc1006:rfc1006_des') {
         compile project(':ee:ee-design')
     }
 }
+
+
+
+
 
 
 
