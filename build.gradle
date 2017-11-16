@@ -556,6 +556,16 @@ project(':rfc1006:rfc1006_des') {
 }
 
 
+project(':eye:eye'){
+    dependencies {
+    }
+}
+
+project(':eye:eye_des') {
+    dependencies {
+        compile project(':ee:ee-design')
+    }
+}
 
 
 
