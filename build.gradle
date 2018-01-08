@@ -106,7 +106,7 @@ project(':ee:ee-axon_example') {
 project(':ee:ee-lang_item') {
     dependencies {
         compile project(':ee:ee-common')
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson" ) {
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson") {
             exclude module: "kotlin-reflect"
         }
         compile "org.jetbrains.kotlin:kotlin-reflect:${version_kotlin}"
@@ -227,7 +227,7 @@ project(':ee-slides:ee-slides') {
 project(':ee-slides:ee-slides_json') {
     dependencies {
         compile project(':ee-slides:ee-slides')
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson" ) {
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson") {
             exclude module: "kotlin-reflect"
         }
         compile "org.jetbrains.kotlin:kotlin-reflect:${version_kotlin}"
@@ -273,7 +273,7 @@ project(':ee-timeline:ee-timeline') {
 project(':ee-timeline:ee-timeline_json') {
     dependencies {
         compile project(':ee-timeline:ee-timeline')
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson" ) {
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson") {
             exclude module: "kotlin-reflect"
         }
         compile "org.jetbrains.kotlin:kotlin-reflect:${version_kotlin}"
@@ -297,7 +297,7 @@ project(':ee-elastic:ee-elastic') {
     dependencies {
         compile project(':ee:ee-common')
         compile "org.elasticsearch.client:transport:$version_elasticsearch"
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson" ) {
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson") {
             exclude module: "kotlin-reflect"
         }
         compile "org.jetbrains.kotlin:kotlin-reflect:${version_kotlin}"
@@ -373,6 +373,24 @@ project(':ee-office:ee-word') {
     }
 }
 
+project(':ee-office:ee-translate') {
+    dependencies {
+        compile project(':ee-office:ee-powerpoint')
+        compile project(':ee-office:ee-excel')
+        compile "com.google.cloud:google-cloud-translate:$version_google_cloud"
+    }
+}
+
+project(':ee-office:ee-translate_fx') {
+    dependencies {
+        compile project(':ee-office:ee-translate')
+        compile("no.tornado:tornadofx:$version_tornadofx") {
+            exclude module: "kotlin-stdlib-jre8"
+            exclude module: "kotlin-reflect"
+        }
+    }
+}
+
 project(':ee-grab:ee-grab') {
     dependencies {
         compile project(':ee:ee-common')
@@ -423,7 +441,7 @@ project(':ee-grab:ee-moodle_fx') {
     }
 
     task copyDrivers(type: Copy) {
-        from "$buildDir/../../ee-grab/drivers"
+        from "$buildDir/../..:ee-grab/drivers"
         into "$buildDir/drivers"
     }
 
@@ -510,41 +528,7 @@ project(':ee-schkola:ee-schkola_groovy') {
     }
 }
 
-project(':cg:cg'){
-    dependencies {
-        compile project(':ee:ee-common')
-    }
-}
-project(':cg:cg_des'){
-    dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee:ee-design')
-        compile project(':ee:ee-system')
-    }
-}
-project(':cg:cg_fx'){
-    apply plugin: 'application'
-    mainClassName = 'cg.ee.fx.CgApp'
-
-    dependencies {
-        compile project(':ee:ee-lang_fx')
-        compile project(':cg:cg_des')
-        compile "no.tornado:tornadofx:$version_tornadofx"
-    }
-
-    jar {
-        manifest {
-            attributes(
-                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-                    'Main-Class': 'cg.ee.fx.CgApp'
-            )
-        }
-        from configurations.compile.collect { entry -> zipTree(entry) }
-    }
-}
-
-
-project(':rfc1006:rfc1006'){
+project(':rfc1006:rfc1006') {
     dependencies {
     }
 }
@@ -555,8 +539,7 @@ project(':rfc1006:rfc1006_des') {
     }
 }
 
-
-project(':eye:eye'){
+project(':eye:eye') {
     dependencies {
     }
 }
@@ -566,6 +549,7 @@ project(':eye:eye_des') {
         compile project(':ee:ee-design')
     }
 }
+
 
 
 
