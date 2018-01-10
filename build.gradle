@@ -381,16 +381,6 @@ project(':ee-office:ee-translate') {
     }
 }
 
-project(':ee-office:ee-translate_fx') {
-    dependencies {
-        compile project(':ee-office:ee-translate')
-        compile("no.tornado:tornadofx:$version_tornadofx") {
-            exclude module: "kotlin-stdlib-jre8"
-            exclude module: "kotlin-reflect"
-        }
-    }
-}
-
 project(':ee-grab:ee-grab') {
     dependencies {
         compile project(':ee:ee-common')
@@ -441,7 +431,7 @@ project(':ee-grab:ee-moodle_fx') {
     }
 
     task copyDrivers(type: Copy) {
-        from "$buildDir/../..:ee-grab/drivers"
+        from "$buildDir/../../ee-grab/drivers"
         into "$buildDir/drivers"
     }
 
