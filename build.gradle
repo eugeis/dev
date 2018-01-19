@@ -76,6 +76,8 @@ subprojects {
             languageVersion = "1.1"
         }
     }
+
+    task allDeps(type: DependencyReportTask) {}
 }
 
 
