@@ -341,6 +341,7 @@ project(':ee-office:ee-powerpoint') {
         compile project(':ee:ee-common')
         compile project(':ee:ee-design')
         compile project(':ee-slides:ee-slides_json')
+        compile project(':ee-office:ee-translate')
 
         compile "org.apache.poi:poi-ooxml:$version_ooxml"
     }
@@ -353,6 +354,16 @@ project(':ee-office:ee-word') {
 
         compile "org.apache.poi:poi-ooxml:$version_ooxml"
         compile "org.apache.poi:poi-scratchpad:$version_poi_scratchpad"
+    }
+}
+
+project(':ee-office:ee-docx4j') {
+    dependencies {
+        compile project(':ee:ee-common')
+        compile project(':ee-slides:ee-slides_json')
+        compile project(':ee-office:ee-translate')
+
+        compile "org.docx4j:docx4j:$version_docx4j"
     }
 }
 
@@ -387,7 +398,6 @@ project(':ee-office:ee-word') {
 
 project(':ee-office:ee-translate') {
     dependencies {
-        compile project(':ee-office:ee-powerpoint')
         compile project(':ee-office:ee-excel')
         compile "com.google.cloud:google-cloud-translate:$version_google_cloud"
     }
@@ -396,6 +406,7 @@ project(':ee-office:ee-translate') {
 project(':ee-office:ee-translate_fx') {
     dependencies {
         compile project(':ee-office:ee-translate')
+        compile project(':ee-office:ee-powerpoint')
         compile("no.tornado:tornadofx:$version_tornadofx") {
             exclude module: "kotlin-stdlib-jre8"
             exclude module: "kotlin-reflect"
