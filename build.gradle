@@ -80,7 +80,6 @@ subprojects {
     task allDeps(type: DependencyReportTask) {}
 }
 
-
 project(':ee:ee-common_java') {
 }
 
@@ -406,7 +405,7 @@ project(':ee-office:ee-translate') {
 project(':ee-office:ee-translate_fx') {
     dependencies {
         compile project(':ee-office:ee-translate')
-        compile project(':ee-office:ee-powerpoint')
+        compile project(':ee-office:ee-docx4j')
         compile("no.tornado:tornadofx:$version_tornadofx") {
             exclude module: "kotlin-stdlib-jre8"
             exclude module: "kotlin-reflect"
