@@ -158,6 +158,13 @@ project(':ee:ee-design_ui_des_asm') {
     }
 }
 
+project(':ee:ee-design_swagger') {
+    dependencies {
+        compile project(':ee:ee-design')
+        compile "io.swagger:swagger-parser:${version_swagger}"
+    }
+}
+
 project(':ee:ee-lang') {
     dependencies {
         compile project(':ee:ee-lang_item')
