@@ -1,5 +1,4 @@
 buildscript {
-    ext.kotlin_version = '1.2.0-rc-39'
     repositories {
         mavenLocal()
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
@@ -97,12 +96,10 @@ project(':ee:ee-asm') {
     }
 }
 
+/*
 project(':ee:ee-axon_example') {
     apply plugin: 'org.springframework.boot'
-
-    repositories {
-        mavenCentral()
-    }
+    apply plugin: 'io.spring.dependency-management'
 
     dependencies {
         compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -115,6 +112,7 @@ project(':ee:ee-axon_example') {
         testCompile("org.axonframework:axon-test:${version_axon}")
     }
 }
+*/
 
 project(':ee:ee-lang_item') {
     dependencies {
