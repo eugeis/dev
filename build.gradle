@@ -363,6 +363,7 @@ project(':ee-office:ee-docx4j') {
         compile project(':ee-office:ee-translate')
 
         compile "org.docx4j:docx4j:$version_docx4j"
+        compile "javax.xml.bind:jaxb-api:2.3.0"
     }
 }
 
