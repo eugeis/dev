@@ -13,9 +13,8 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$version_spring_boot")
     }
 }
-apply plugin: 'kotlin2js'
 
-task wrapper(type: Wrapper) { gradleVersion = "$version_gradle" }
+task wrapper(type: Wrapper) { gradleVersion = '4.1' }
 
 allprojects {
     group = 'ee'
@@ -26,8 +25,6 @@ subprojects {
     apply plugin: "kotlin"
     apply plugin: 'maven'
     apply plugin: 'maven-publish'
-    apply plugin: 'idea'
-    apply plugin: 'eclipse'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -45,6 +42,7 @@ subprojects {
 
     sourceSets {
         main {
+            kotlin.srcDirs = ['src/main/java', 'src-gen/main/java']
             kotlin.srcDirs = ['src/main/kotlin', 'src-gen/main/kotlin']
         }
     }
@@ -94,10 +92,10 @@ project(':ee:ee-axon_example') {
         compile('org.springframework.boot:spring-boot-starter-data-jpa')
         compile('org.springframework.boot:spring-boot-starter-jersey')
         compile('org.springframework.boot:spring-boot-starter-web')
-        compile("org.axonframework:axon-spring:${version_axon}")
-        compileOnly('org.projectlombok:lombok')
         runtime('org.hsqldb:hsqldb')
+        compileOnly('org.projectlombok:lombok')
         testCompile('org.springframework.boot:spring-boot-starter-test')
+        compile("org.axonframework:axon-spring:${version_axon}")
         testCompile("org.axonframework:axon-test:${version_axon}")
     }
 }
@@ -149,6 +147,13 @@ project(':ee:ee-design_swagger') {
     dependencies {
         compile project(':ee:ee-design')
         compile "io.swagger:swagger-parser:${version_swagger}"
+    }
+}
+
+project(':ee:ee-design_xsd') {
+    dependencies {
+        compile project(':ee:ee-design')
+        compile "com.sun.xsom:xsom:${version_xsom}"
     }
 }
 
