@@ -1,3 +1,13 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        maven { url = uri("http://dl.bintray.com/kotlin/kotlin-eap") }
+        maven { url = uri("http://dl.bintray.com/kotlin/kotlin-dev") }
+        jcenter()
+        mavenCentral()
+    }
+}
+
 include ("ee:ee-common_java", "ee:ee-common", "ee:ee-lang_item", "ee:ee-lang_gen", "ee:ee-lang",
 "ee:ee-design_gen", "ee:ee-design", "ee:ee-design_swagger", "ee:ee-design_xsd",
 "ee:ee-asm", "ee:ee-design_ui", "ee:ee-design_ui_des", "ee:ee-design_ui_des_asm",
