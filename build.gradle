@@ -420,10 +420,7 @@ project(':ee-office:ee-translate_fx') {
     dependencies {
         compile project(':ee-office:ee-translate')
         compile project(':ee-office:ee-docx4j')
-        compile("no.tornado:tornadofx:$version_tornadofx") {
-            exclude module: "kotlin-stdlib-jre8"
-            exclude module: "kotlin-reflect"
-        }
+        compile project(':ee:tornadoFxBom')
     }
 }
 
