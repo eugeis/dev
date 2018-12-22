@@ -1,16 +1,29 @@
 buildscript {
     repositories {
+        //maven { url uri('file:///D/TC_CACHE/CG-maven-repo') }
         mavenLocal()
+        mavenCentral()
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven { url 'https://repo.spring.io/milestone' }
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
-        jcenter()
-        mavenCentral()
-    }
+        maven { url "https://plugins.gradle.org/m2/" }
+        /*
+        maven {
 
+            url 'http://129.103.160.104:8081/nexus/content/groups/controlguide/'
+        }
+        */
+/*
+    mavenLocal()
+    maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+    */
+    }
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin_gradle"
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$version_spring_boot")
+        classpath "org.openjfx:javafx-plugin:0.0.5"
     }
 }
 
@@ -46,13 +59,45 @@ subprojects {
             kotlin.srcDirs = ['src/main/kotlin', 'src-gen/main/kotlin']
         }
     }
+	
+	
 
     repositories {
+        //maven { url uri('file:///D/TC_CACHE/CG-maven-repo') }
         mavenLocal()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
+        /*
+        maven {
+            url 'http://129.103.160.104:8081/nexus/content/groups/controlguide/'
+        }
+        */
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
+        /*
+        mavenCentral()
+        */
+/*
+    maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+    */
         jcenter()
         mavenCentral()
+
+    }
+
+    publishing {
+        repositories {
+            mavenLocal()
+            //maven { url uri('file:///D/CG-maven-repo') }
+        }
+
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
     }
 
     dependencies {
@@ -73,6 +118,11 @@ subprojects {
 }
 
 project(':ee:tornadoFxBom') {
+    apply plugin: "org.openjfx.javafxplugin"
+
+    javafx {
+        modules = [ 'javafx.controls' ]
+    }
 
     dependencies {
 
@@ -95,6 +145,12 @@ project(':ee:ee-common') {
 }
 
 project(':ee:ee-asm') {
+    apply plugin: "org.openjfx.javafxplugin"
+
+    javafx {
+        modules = [ 'javafx.controls' ]
+    }
+
     dependencies {
         compile project(':ee:ee-common')
         compile "org.ow2.asm:asm:${version_asm}"
@@ -435,22 +491,26 @@ project(':ee-grab:ee-grab') {
     }
 
 }
+
 project(':ee-grab:ee-fiveh') {
     dependencies {
         compile project(':ee-grab:ee-grab')
         compile project(':ee-email:ee-email')
     }
 }
+
 project(':ee-grab:ee-rulit') {
     dependencies {
         compile project(':ee-grab:ee-grab')
     }
 }
+
 project(':ee-grab:ee-moodle') {
     dependencies {
         compile project(':ee-grab:ee-grab')
     }
 }
+
 project(':ee-grab:ee-moodle_fx') {
     apply plugin: 'application'
     mainClassName = 'ee.moodle.fx.MoodleApp'
@@ -507,6 +567,7 @@ project(':ee-schkola:ee-schkola') {
         testCompile project(':ee-email:ee-email_excel')
     }
 }
+
 project(':ee-schkola:ee-schkola_fx') {
     apply plugin: 'application'
 
@@ -529,6 +590,7 @@ project(':ee-schkola:ee-schkola_fx') {
 
     mainClassName = "ee.schkola.fx.app.MyApp"
 }
+
 project(':ee-schkola:ee-schkola_des') {
     dependencies {
         compile project(':ee:ee-common')
@@ -536,12 +598,14 @@ project(':ee-schkola:ee-schkola_des') {
         compile project(':ee:ee-system')
     }
 }
+
 project(':ee-schkola:ee-schkola_des_fx') {
     dependencies {
         compile project(':ee-schkola:ee-schkola_des')
         compile project(':ee:ee-lang_fx')
     }
 }
+
 project(':ee-schkola:ee-schkola_groovy') {
     apply plugin: "groovy"
 
