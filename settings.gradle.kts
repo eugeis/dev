@@ -13,7 +13,7 @@ include ("ee:ee-common_java", "ee:ee-common", "ee:ee-lang_item", "ee:ee-lang_gen
 "ee:ee-asm", "ee:ee-design_ui", "ee:ee-design_ui_des", "ee:ee-design_ui_des_asm",
 "ee:ee-task_des", "ee:ee-task",
 "ee:ee-system_des", "ee:ee-system",
-"ee:ee-design_task", "ee:ee-lang_fx")
+"ee:ee-design_task", "ee:ee-lang_fx", "ee:tornadoFxBom")
 //include "ee:ee-axon_example"
 include ("ee-slides:ee-slides_des", "ee-slides:ee-slides", "ee-slides:ee-slides_json", "ee-slides:ee-slides_fx")
 include ("ee-timeline:ee-timeline_des", "ee-timeline:ee-timeline", "ee-timeline:ee-timeline_json", "ee-timeline:ee-timeline_excel")
