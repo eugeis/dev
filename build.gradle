@@ -23,7 +23,7 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin_gradle"
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$version_spring_boot")
-        classpath "org.openjfx:javafx-plugin:0.0.5"
+        classpath "org.openjfx:javafx-plugin:0.0.6"
     }
 }
 
@@ -212,6 +212,12 @@ project(':ee:ee-design_ui_des') {
 }
 
 project(':ee:ee-design_ui_des_asm') {
+    apply plugin: "org.openjfx.javafxplugin"
+
+    javafx {
+        modules = [ 'javafx.controls' ]
+    }
+
     dependencies {
         compile project(':ee:ee-design')
         compile project(':ee:ee-asm')
@@ -278,6 +284,12 @@ project(':ee:ee-design_task') {
 
 project(':ee:ee-lang_fx') {
     apply plugin: 'application'
+    apply plugin: "org.openjfx.javafxplugin"
+
+    javafx {
+        modules = [ 'javafx.controls' ]
+    }
+
     mainClassName = 'ee.lang.fx.ModelApp'
 
     dependencies {
@@ -320,6 +332,12 @@ project(':ee-slides:ee-slides_json') {
 
 project(':ee-slides:ee-slides_fx') {
     apply plugin: 'application'
+    apply plugin: "org.openjfx.javafxplugin"
+
+    javafx {
+        modules = [ 'javafx.controls' ]
+    }
+
     mainClassName = 'ee.slides.fx.SlidesApp'
 
     dependencies {
@@ -473,6 +491,12 @@ project(':ee-office:ee-translate') {
 }
 
 project(':ee-office:ee-translate_fx') {
+    apply plugin: "org.openjfx.javafxplugin"
+
+    javafx {
+        modules = [ 'javafx.controls' ]
+    }
+
     dependencies {
         compile project(':ee-office:ee-translate')
         compile project(':ee-office:ee-docx4j')
@@ -513,6 +537,12 @@ project(':ee-grab:ee-moodle') {
 
 project(':ee-grab:ee-moodle_fx') {
     apply plugin: 'application'
+    apply plugin: "org.openjfx.javafxplugin"
+
+    javafx {
+        modules = [ 'javafx.controls' ]
+    }
+
     mainClassName = 'ee.moodle.fx.MoodleApp'
 
     dependencies {
@@ -570,6 +600,11 @@ project(':ee-schkola:ee-schkola') {
 
 project(':ee-schkola:ee-schkola_fx') {
     apply plugin: 'application'
+    apply plugin: "org.openjfx.javafxplugin"
+
+    javafx {
+        modules = [ 'javafx.controls' ]
+    }
 
     dependencies {
         compile project(':ee:ee-common')
@@ -600,6 +635,12 @@ project(':ee-schkola:ee-schkola_des') {
 }
 
 project(':ee-schkola:ee-schkola_des_fx') {
+    apply plugin: "org.openjfx.javafxplugin"
+
+    javafx {
+        modules = [ 'javafx.controls' ]
+    }
+
     dependencies {
         compile project(':ee-schkola:ee-schkola_des')
         compile project(':ee:ee-lang_fx')
