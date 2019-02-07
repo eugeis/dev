@@ -31,7 +31,8 @@ task wrapper(type: Wrapper) { gradleVersion = "$version_gradle" }
 
 allprojects {
     group = 'ee'
-    version = 'dev-SNAPSHOT'
+    //version = 'dev-SNAPSHOT'
+    version = eeVersion
 }
 
 subprojects {
