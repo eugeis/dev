@@ -1,3 +1,5 @@
+import org.gradle.internal.jvm.Jvm
+
 buildscript {
     repositories {
         //maven { url uri('file:///D/TC_CACHE/CG-maven-repo') }
@@ -23,7 +25,7 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin_gradle"
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$version_spring_boot")
-        classpath "org.openjfx:javafx-plugin:0.0.6"
+        classpath "org.openjfx:javafx-plugin:0.0.7"
     }
 }
 
@@ -119,10 +121,12 @@ subprojects {
 }
 
 project(':ee:tornadoFxBom') {
-    apply plugin: "org.openjfx.javafxplugin"
+    if (Jvm.current().toString().startsWith('11')) {
+        apply plugin: "org.openjfx.javafxplugin"
 
-    javafx {
-        modules = [ 'javafx.controls' ]
+        javafx {
+            modules = ['javafx.controls']
+        }
     }
 
     dependencies {
@@ -146,10 +150,12 @@ project(':ee:ee-common') {
 }
 
 project(':ee:ee-asm') {
-    apply plugin: "org.openjfx.javafxplugin"
+    if (Jvm.current().toString().startsWith('11')) {
+        apply plugin: "org.openjfx.javafxplugin"
 
-    javafx {
-        modules = [ 'javafx.controls' ]
+        javafx {
+            modules = ['javafx.controls']
+        }
     }
 
     dependencies {
@@ -213,10 +219,12 @@ project(':ee:ee-design_ui_des') {
 }
 
 project(':ee:ee-design_ui_des_asm') {
-    apply plugin: "org.openjfx.javafxplugin"
+    if (Jvm.current().toString().startsWith('11')) {
+        apply plugin: "org.openjfx.javafxplugin"
 
-    javafx {
-        modules = [ 'javafx.controls' ]
+        javafx {
+            modules = ['javafx.controls']
+        }
     }
 
     dependencies {
@@ -285,10 +293,12 @@ project(':ee:ee-design_task') {
 
 project(':ee:ee-lang_fx') {
     apply plugin: 'application'
-    apply plugin: "org.openjfx.javafxplugin"
+    if (Jvm.current().toString().startsWith('11')) {
+        apply plugin: "org.openjfx.javafxplugin"
 
-    javafx {
-        modules = [ 'javafx.controls' ]
+        javafx {
+            modules = ['javafx.controls']
+        }
     }
 
     mainClassName = 'ee.lang.fx.ModelApp'
@@ -333,10 +343,12 @@ project(':ee-slides:ee-slides_json') {
 
 project(':ee-slides:ee-slides_fx') {
     apply plugin: 'application'
-    apply plugin: "org.openjfx.javafxplugin"
+    if (Jvm.current().toString().startsWith('11')) {
+        apply plugin: "org.openjfx.javafxplugin"
 
-    javafx {
-        modules = [ 'javafx.controls' ]
+        javafx {
+            modules = ['javafx.controls']
+        }
     }
 
     mainClassName = 'ee.slides.fx.SlidesApp'
@@ -492,10 +504,12 @@ project(':ee-office:ee-translate') {
 }
 
 project(':ee-office:ee-translate_fx') {
-    apply plugin: "org.openjfx.javafxplugin"
+    if (Jvm.current().toString().startsWith('11')) {
+        apply plugin: "org.openjfx.javafxplugin"
 
-    javafx {
-        modules = [ 'javafx.controls' ]
+        javafx {
+            modules = ['javafx.controls']
+        }
     }
 
     dependencies {
@@ -538,10 +552,12 @@ project(':ee-grab:ee-moodle') {
 
 project(':ee-grab:ee-moodle_fx') {
     apply plugin: 'application'
-    apply plugin: "org.openjfx.javafxplugin"
+    if (Jvm.current().toString().startsWith('11')) {
+        apply plugin: "org.openjfx.javafxplugin"
 
-    javafx {
-        modules = [ 'javafx.controls' ]
+        javafx {
+            modules = ['javafx.controls']
+        }
     }
 
     mainClassName = 'ee.moodle.fx.MoodleApp'
@@ -601,10 +617,12 @@ project(':ee-schkola:ee-schkola') {
 
 project(':ee-schkola:ee-schkola_fx') {
     apply plugin: 'application'
-    apply plugin: "org.openjfx.javafxplugin"
+    if (Jvm.current().toString().startsWith('11')) {
+        apply plugin: "org.openjfx.javafxplugin"
 
-    javafx {
-        modules = [ 'javafx.controls' ]
+        javafx {
+            modules = ['javafx.controls']
+        }
     }
 
     dependencies {
@@ -636,10 +654,12 @@ project(':ee-schkola:ee-schkola_des') {
 }
 
 project(':ee-schkola:ee-schkola_des_fx') {
-    apply plugin: "org.openjfx.javafxplugin"
+    if (Jvm.current().toString().startsWith('11')) {
+        apply plugin: "org.openjfx.javafxplugin"
 
-    javafx {
-        modules = [ 'javafx.controls' ]
+        javafx {
+            modules = ['javafx.controls']
+        }
     }
 
     dependencies {
