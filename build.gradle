@@ -702,3 +702,27 @@ project(':eye:eye_des') {
         compile project(':ee:ee-design')
     }
 }
+
+
+project(':counter:counter') {
+    dependencies {
+    }
+}
+
+project(':counter:counter-des') {
+    dependencies {
+        compile project(':ee:ee-design')
+    }
+}
+
+
+project(':auth:auth') {
+    dependencies {
+    }
+}
+
+project(':auth:auth-des') {
+    dependencies {
+        compile project(':ee:ee-design')
+    }
+}
