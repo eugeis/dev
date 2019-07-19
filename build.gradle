@@ -41,11 +41,11 @@ subprojects {
     apply plugin: "org.jetbrains.kotlin.jvm"
     apply plugin: 'maven'
     apply plugin: 'maven-publish'
-
+    
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
-    compileKotlin {
+	compileKotlin {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -55,7 +55,7 @@ subprojects {
             languageVersion = "1.3"
         }
     }
-
+	
     sourceSets {
         main {
             kotlin.srcDirs = ['src/main/java', 'src-gen/main/java']
