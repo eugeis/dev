@@ -536,6 +536,9 @@ project(':ee-grab:ee-grab') {
         compile "org.seleniumhq.selenium:selenium-chrome-driver:$version_selenium"
         compile "org.seleniumhq.selenium:selenium-support:$version_selenium"
         compile "org.apache.httpcomponents:httpclient:$version_httpclient"
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson") {
+            exclude module: "kotlin-reflect"
+        }
     }
 
 }
@@ -548,6 +551,12 @@ project(':ee-grab:ee-fiveh') {
 }
 
 project(':ee-grab:ee-rulit') {
+    dependencies {
+        compile project(':ee-grab:ee-grab')
+    }
+}
+
+project(':ee-grab:ee-sharepoint') {
     dependencies {
         compile project(':ee-grab:ee-grab')
     }
