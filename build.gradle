@@ -2,7 +2,6 @@ import org.gradle.internal.jvm.Jvm
 
 buildscript {
     repositories {
-        //maven { url uri('file:///D/TC_CACHE/CG-maven-repo') }
         mavenLocal()
         mavenCentral()
         maven { url 'https://repo.spring.io/snapshot' }
@@ -10,30 +9,21 @@ buildscript {
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
         maven { url "https://plugins.gradle.org/m2/" }
-        /*
-        maven {
-
-            url 'http://129.103.160.104:8081/nexus/content/groups/controlguide/'
-        }
-        */
-/*
-    mavenLocal()
-    maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
-    */
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin_gradle"
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:$version_spring_boot")
-        classpath "org.openjfx:javafx-plugin:0.0.7"
+        classpath(platform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion"))
+        classpath(platform("org.jetbrains.kotlinx:kotlinx-coroutines-bom:$kotlinCoroutinesVersion"))
+        classpath(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
+
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+        classpath "org.openjfx:javafx-plugin:0.0.8"
     }
 }
 
-//task wrapper(type: Wrapper) { gradleVersion = "$version_gradle" }
-
 allprojects {
     group = 'ee'
-    //version = 'dev-SNAPSHOT'
     version = eeVersion
 }
 
@@ -64,25 +54,11 @@ subprojects {
     }
 
     repositories {
-        //maven { url uri('file:///D/TC_CACHE/CG-maven-repo') }
         mavenLocal()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
-        /*
-        maven {
-            url 'http://129.103.160.104:8081/nexus/content/groups/controlguide/'
-        }
-        */
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
-        /*
-        mavenCentral()
-        */
-/*
-    maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
-    */
         jcenter()
         mavenCentral()
 
@@ -100,7 +76,6 @@ subprojects {
     publishing {
         repositories {
             mavenLocal()
-            //maven { url uri('file:///D/CG-maven-repo') }
         }
 
         publications {
@@ -113,17 +88,25 @@ subprojects {
     }
 
     dependencies {
-        compile "org.slf4j:slf4j-api:$version_slf4j"
-        compile "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
-        compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
+        //implementation(platform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion"))
+        implementation(platform("org.jetbrains.kotlinx:kotlinx-coroutines-bom:$kotlinCoroutinesVersion"))
+        implementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
+        //implementation(platform("org.springframework:spring-framework-bom:$springVersion"))
 
-        testCompile "org.hamcrest:hamcrest-library:${hamcrestVersion}"
-        testCompile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+        //implementation(platform("io.ktor:ktor-bom:$versionKtor"))
 
-        runtime "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-        runtime "org.junit.platform:junit-platform-launcher:${junitPlatformVersion}"
 
-        runtime "ch.qos.logback:logback-classic:$version_logback"
+        compile "org.slf4j:slf4j-api"
+        compile "org.jetbrains.kotlin:kotlin-stdlib"
+        compile "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+
+        testCompile "org.hamcrest:hamcrest-library"
+        testCompile "org.junit.jupiter:junit-jupiter-api"
+
+        runtime "org.junit.jupiter:junit-jupiter-engine"
+        runtime "org.junit.platform:junit-platform-launcher"
+
+        runtime "ch.qos.logback:logback-classic"
     }
 
     task allDeps(type: DependencyReportTask) {}
@@ -195,10 +178,10 @@ project(':ee:ee-axon_example') {
 project(':ee:ee-lang_item') {
     dependencies {
         compile project(':ee:ee-common')
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson") {
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
             exclude module: "kotlin-reflect"
         }
-        compile "org.jetbrains.kotlin:kotlin-reflect:${version_kotlin}"
+        compile "org.jetbrains.kotlin:kotlin-reflect"
     }
 }
 
@@ -283,7 +266,7 @@ project(':ee:ee-task_des') {
 project(':ee:ee-system_des') {
     dependencies {
         compile project(':ee:ee-task_des')
-        compile "org.jetbrains.kotlin:kotlin-reflect:${version_kotlin}"
+        compile "org.jetbrains.kotlin:kotlin-reflect"
     }
 }
 
@@ -343,10 +326,10 @@ project(':ee-slides:ee-slides') {
 project(':ee-slides:ee-slides_json') {
     dependencies {
         compile project(':ee-slides:ee-slides')
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson") {
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
             exclude module: "kotlin-reflect"
         }
-        compile "org.jetbrains.kotlin:kotlin-reflect:${version_kotlin}"
+        compile "org.jetbrains.kotlin:kotlin-reflect"
     }
 }
 
@@ -365,7 +348,7 @@ project(':ee-slides:ee-slides_fx') {
     dependencies {
         compile project(':ee-slides:ee-slides_json')
         compile project(':ee:tornadoFxBom')
-        compile "org.jetbrains.kotlin:kotlin-reflect:${version_kotlin}"
+        compile "org.jetbrains.kotlin:kotlin-reflect"
     }
 
     jar {
@@ -394,10 +377,10 @@ project(':ee-timeline:ee-timeline') {
 project(':ee-timeline:ee-timeline_json') {
     dependencies {
         compile project(':ee-timeline:ee-timeline')
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson") {
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
             exclude module: "kotlin-reflect"
         }
-        compile "org.jetbrains.kotlin:kotlin-reflect:${version_kotlin}"
+        compile "org.jetbrains.kotlin:kotlin-reflect"
     }
 }
 
@@ -418,11 +401,11 @@ project(':ee-elastic:ee-elastic') {
     dependencies {
         compile project(':ee:ee-common')
         compile "org.elasticsearch.client:transport:$version_elasticsearch"
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson") {
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
             exclude module: "kotlin-reflect"
             exclude module: "kotlin-stdlib-jdk7"
         }
-        compile "org.jetbrains.kotlin:kotlin-reflect:${version_kotlin}"
+        compile "org.jetbrains.kotlin:kotlin-reflect"
     }
 }
 
@@ -535,8 +518,8 @@ project(':ee-grab:ee-grab') {
         compile "org.seleniumhq.selenium:selenium-firefox-driver:$version_selenium"
         compile "org.seleniumhq.selenium:selenium-chrome-driver:$version_selenium"
         compile "org.seleniumhq.selenium:selenium-support:$version_selenium"
-        compile "org.apache.httpcomponents:httpclient:$version_httpclient"
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson") {
+        compile "org.apache.httpcomponents:httpclient"
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
             exclude module: "kotlin-reflect"
         }
     }
@@ -561,6 +544,7 @@ project(':ee-grab:ee-sharepoint') {
         compile project(':ee-grab:ee-grab')
     }
 }
+
 
 project(':ee-grab:ee-moodle') {
     dependencies {
@@ -759,6 +743,7 @@ project(':cg:cg_fx') {
     }
 }
 
+/*
 project(':counter:counter') {
     dependencies {
     }
@@ -781,3 +766,4 @@ project(':auth:auth-des') {
         compile project(':ee:ee-design')
     }
 }
+*/
