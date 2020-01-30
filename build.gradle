@@ -31,11 +31,11 @@ subprojects {
     apply plugin: "org.jetbrains.kotlin.jvm"
     apply plugin: 'maven'
     apply plugin: 'maven-publish'
-    
+
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
-	compileKotlin {
+    compileKotlin {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -45,10 +45,9 @@ subprojects {
             languageVersion = "1.3"
         }
     }
-	
+
     sourceSets {
         main {
-            kotlin.srcDirs = ['src/main/java', 'src-gen/main/java']
             kotlin.srcDirs = ['src/main/kotlin', 'src-gen/main/kotlin']
         }
     }
@@ -61,7 +60,7 @@ subprojects {
         maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
         jcenter()
         mavenCentral()
-
+        maven { url "https://jitpack.io" }
     }
 
     task sourcesJar(type: Jar, dependsOn: classes) {
@@ -94,11 +93,6 @@ subprojects {
         //implementation(platform("org.springframework:spring-framework-bom:$springVersion"))
 
         //implementation(platform("io.ktor:ktor-bom:$versionKtor"))
-
-
-        compile "org.slf4j:slf4j-api"
-        compile "org.jetbrains.kotlin:kotlin-stdlib"
-        compile "org.jetbrains.kotlinx:kotlinx-coroutines-core"
 
         testCompile "org.hamcrest:hamcrest-library"
         testCompile "org.junit.jupiter:junit-jupiter-api"
@@ -138,6 +132,9 @@ project(':ee:ee-common_java') {
 project(':ee:ee-common') {
     dependencies {
         compile project(':ee:ee-common_java')
+        compile "org.slf4j:slf4j-api"
+        compile "org.jetbrains.kotlin:kotlin-stdlib"
+        compile "org.jetbrains.kotlinx:kotlinx-coroutines-core"
     }
 }
 
@@ -232,6 +229,15 @@ project(':ee:ee-design_swagger') {
     }
 }
 
+project(':ee:ee-design_json') {
+    dependencies {
+        compile project(':ee:ee-design')
+
+        compile "com.worldturner.medeia:medeia-validator-jackson:${version_json_schema_medeia}"
+        compile "com.github.everit-org.json-schema:org.everit.json.schema:1.12.1"
+    }
+}
+
 project(':ee:ee-design_xsd') {
     dependencies {
         compile project(':ee:ee-design')
@@ -242,6 +248,9 @@ project(':ee:ee-design_xsd') {
 project(':ee:ee-lang') {
     dependencies {
         compile project(':ee:ee-lang_item')
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
+            exclude module: "kotlin-reflect"
+        }
     }
 }
 
@@ -648,10 +657,23 @@ project(':ee-schkola:ee-schkola_fx') {
 }
 
 project(':ee-schkola:ee-schkola_des') {
+
+    sourceSets {
+        main {
+            kotlin.srcDirs = [
+                    'src/main/kotlin',
+                    'src/external/1', 'src/external/2', 'src/external/3',
+                    'src/external/4', 'src/external/5']
+        }
+    }
+
     dependencies {
         compile project(':ee:ee-common')
         compile project(':ee:ee-design')
         compile project(':ee:ee-system')
+
+        compile project(':ee:ee-design_swagger')
+        compile project(':ee:ee-design_json')
     }
 }
 
@@ -705,9 +727,11 @@ project(':eye:eye_des') {
     }
 }
 
-
-
-
+project(':auth:auth-des') {
+    dependencies {
+        compile project(':ee:ee-design')
+    }
+}
 
 
 project(':cg:cg') {
