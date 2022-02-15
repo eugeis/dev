@@ -6,8 +6,8 @@ buildscript {
         mavenCentral()
         maven { url 'https://repo.spring.io/snapshot' }
         maven { url 'https://repo.spring.io/milestone' }
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
+        //maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+        //maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
         maven { url "https://plugins.gradle.org/m2/" }
     }
 
@@ -56,8 +56,8 @@ subprojects {
         mavenLocal()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
+        //maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+        //maven { url 'http://dl.bintray.com/kotlin/kotlin-dev' }
         jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" }
@@ -703,28 +703,6 @@ project(':ee-schkola:ee-schkola_groovy') {
         compile 'org.codehaus.groovy:groovy-all:2.4.7'
 
         testCompile project(':ee:ee-design')
-    }
-}
-
-project(':rfc1006:rfc1006') {
-    dependencies {
-    }
-}
-
-project(':rfc1006:rfc1006_des') {
-    dependencies {
-        compile project(':ee:ee-design')
-    }
-}
-
-project(':eye:eye') {
-    dependencies {
-    }
-}
-
-project(':eye:eye_des') {
-    dependencies {
-        compile project(':ee:ee-design')
     }
 }
 
