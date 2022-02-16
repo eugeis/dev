@@ -29,7 +29,6 @@ allprojects {
 
 subprojects {
     apply plugin: "org.jetbrains.kotlin.jvm"
-    apply plugin: 'maven'
     apply plugin: 'maven-publish'
 
     sourceCompatibility = 1.8
@@ -94,13 +93,13 @@ subprojects {
 
         //implementation(platform("io.ktor:ktor-bom:$versionKtor"))
 
-        testCompile "org.hamcrest:hamcrest-library"
-        testCompile "org.junit.jupiter:junit-jupiter-api"
+        testImplementation "org.hamcrest:hamcrest-library"
+        testImplementation "org.junit.jupiter:junit-jupiter-api"
 
-        runtime "org.junit.jupiter:junit-jupiter-engine"
-        runtime "org.junit.platform:junit-platform-launcher"
+        runtimeOnly "org.junit.jupiter:junit-jupiter-engine"
+        runtimeOnly "org.junit.platform:junit-platform-launcher"
 
-        runtime "ch.qos.logback:logback-classic"
+        runtimeOnly "ch.qos.logback:logback-classic"
     }
 
     task allDeps(type: DependencyReportTask) {}
@@ -117,7 +116,7 @@ project(':ee:tornadoFxBom') {
 
     dependencies {
 
-        compile("no.tornado:tornadofx:$version_tornadofx") {
+        implementation("no.tornado:tornadofx:$version_tornadofx") {
             exclude module: "kotlin-stdlib-jre8"
             exclude module: "kotlin-reflect"
             exclude module: "kotlin-stdlib-jdk7"
@@ -131,10 +130,10 @@ project(':ee:ee-common_java') {
 
 project(':ee:ee-common') {
     dependencies {
-        compile project(':ee:ee-common_java')
-        compile "org.slf4j:slf4j-api"
-        compile "org.jetbrains.kotlin:kotlin-stdlib"
-        compile "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+        implementation project(':ee:ee-common_java')
+        implementation "org.slf4j:slf4j-api"
+        implementation "org.jetbrains.kotlin:kotlin-stdlib"
+        implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core"
     }
 }
 
@@ -148,9 +147,9 @@ project(':ee:ee-asm') {
     }
 
     dependencies {
-        compile project(':ee:ee-common')
-        compile "org.ow2.asm:asm:${version_asm}"
-        compile "org.ow2.asm:asm-tree:${version_asm}"
+        implementation project(':ee:ee-common')
+        implementation "org.ow2.asm:asm:${version_asm}"
+        implementation "org.ow2.asm:asm-tree:${version_asm}"
     }
 }
 
@@ -160,50 +159,50 @@ project(':ee:ee-axon_example') {
     apply plugin: 'io.spring.dependency-management'
 
     dependencies {
-        compile('org.springframework.boot:spring-boot-starter-data-jpa')
-        compile('org.springframework.boot:spring-boot-starter-jersey')
-        compile('org.springframework.boot:spring-boot-starter-web')
+        implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+        implementation('org.springframework.boot:spring-boot-starter-jersey')
+        implementation('org.springframework.boot:spring-boot-starter-web')
         runtime('org.hsqldb:hsqldb')
-        compileOnly('org.projectlombok:lombok')
-        testCompile('org.springframework.boot:spring-boot-starter-test')
-        compile("org.axonframework:axon-spring:${version_axon}")
-        testCompile("org.axonframework:axon-test:${version_axon}")
+        implementationOnly('org.projectlombok:lombok')
+        testImplementation('org.springframework.boot:spring-boot-starter-test')
+        implementation("org.axonframework:axon-spring:${version_axon}")
+        testImplementation("org.axonframework:axon-test:${version_axon}")
     }
 }
 */
 
 project(':ee:ee-lang_item') {
     dependencies {
-        compile project(':ee:ee-common')
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
+        implementation project(':ee:ee-common')
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin") {
             exclude module: "kotlin-reflect"
         }
-        compile "org.jetbrains.kotlin:kotlin-reflect"
+        implementation "org.jetbrains.kotlin:kotlin-reflect"
     }
 }
 
 project(':ee:ee-design') {
     dependencies {
-        compile project(':ee:ee-lang')
+        implementation project(':ee:ee-lang')
     }
 }
 
 project(':ee:ee-design_gen') {
     dependencies {
-        compile project(':ee:ee-lang')
+        implementation project(':ee:ee-lang')
     }
 }
 
 project(':ee:ee-design_ui') {
     dependencies {
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-design')
     }
 }
 
 project(':ee:ee-design_ui_des') {
     dependencies {
-        compile project(':ee:ee-design')
-        compile project(':ee:ee-asm')
+        implementation project(':ee:ee-design')
+        implementation project(':ee:ee-asm')
     }
 }
 
@@ -217,38 +216,38 @@ project(':ee:ee-design_ui_des_asm') {
     }
 
     dependencies {
-        compile project(':ee:ee-design')
-        compile project(':ee:ee-asm')
+        implementation project(':ee:ee-design')
+        implementation project(':ee:ee-asm')
     }
 }
 
 project(':ee:ee-design_swagger') {
     dependencies {
-        compile project(':ee:ee-design')
-        compile "io.swagger:swagger-parser:${version_swagger}"
+        implementation project(':ee:ee-design')
+        implementation "io.swagger:swagger-parser:${version_swagger}"
     }
 }
 
 project(':ee:ee-design_json') {
     dependencies {
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-design')
 
-        compile "com.worldturner.medeia:medeia-validator-jackson:${version_json_schema_medeia}"
-        compile "com.github.everit-org.json-schema:org.everit.json.schema:1.12.1"
+        implementation "com.worldturner.medeia:medeia-validator-jackson:${version_json_schema_medeia}"
+        implementation "com.github.everit-org.json-schema:org.everit.json.schema:1.12.1"
     }
 }
 
 project(':ee:ee-design_xsd') {
     dependencies {
-        compile project(':ee:ee-design')
-        compile "com.sun.xsom:xsom:${version_xsom}"
+        implementation project(':ee:ee-design')
+        implementation "com.sun.xsom:xsom:${version_xsom}"
     }
 }
 
 project(':ee:ee-lang') {
     dependencies {
-        compile project(':ee:ee-lang_item')
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
+        implementation project(':ee:ee-lang_item')
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin") {
             exclude module: "kotlin-reflect"
         }
     }
@@ -256,39 +255,39 @@ project(':ee:ee-lang') {
 
 project(':ee:ee-lang_gen') {
     dependencies {
-        compile project(':ee:ee-lang_item')
+        implementation project(':ee:ee-lang_item')
     }
 }
 
 project(':ee:ee-task') {
     dependencies {
-        compile project(':ee:ee-lang')
+        implementation project(':ee:ee-lang')
     }
 }
 
 project(':ee:ee-task_des') {
     dependencies {
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-design')
     }
 }
 
 project(':ee:ee-system_des') {
     dependencies {
-        compile project(':ee:ee-task_des')
-        compile "org.jetbrains.kotlin:kotlin-reflect"
+        implementation project(':ee:ee-task_des')
+        implementation "org.jetbrains.kotlin:kotlin-reflect"
     }
 }
 
 project(':ee:ee-system') {
     dependencies {
-        compile project(':ee:ee-task')
+        implementation project(':ee:ee-task')
     }
 }
 
 project(':ee:ee-design_task') {
     dependencies {
-        compile project(':ee:ee-design')
-        compile project(':ee:ee-system')
+        implementation project(':ee:ee-design')
+        implementation project(':ee:ee-system')
     }
 }
 
@@ -305,40 +304,40 @@ project(':ee:ee-lang_fx') {
     mainClassName = 'ee.lang.fx.ModelApp'
 
     dependencies {
-        compile project(':ee:ee-design_task')
-        compile project(':ee:tornadoFxBom')
+        implementation project(':ee:ee-design_task')
+        implementation project(':ee:tornadoFxBom')
     }
 
     jar {
         manifest {
             attributes(
-                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
                     'Main-Class': 'ee.lang.fx.ModelApp'
             )
         }
-        from configurations.compile.collect { entry -> zipTree(entry) }
+        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
     }
 }
 
 project(':ee-slides:ee-slides_des') {
     dependencies {
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-design')
     }
 }
 
 project(':ee-slides:ee-slides') {
     dependencies {
-        compile project(':ee:ee-common')
+        implementation project(':ee:ee-common')
     }
 }
 
 project(':ee-slides:ee-slides_json') {
     dependencies {
-        compile project(':ee-slides:ee-slides')
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
+        implementation project(':ee-slides:ee-slides')
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin") {
             exclude module: "kotlin-reflect"
         }
-        compile "org.jetbrains.kotlin:kotlin-reflect"
+        implementation "org.jetbrains.kotlin:kotlin-reflect"
     }
 }
 
@@ -355,49 +354,49 @@ project(':ee-slides:ee-slides_fx') {
     mainClassName = 'ee.slides.fx.SlidesApp'
 
     dependencies {
-        compile project(':ee-slides:ee-slides_json')
-        compile project(':ee:tornadoFxBom')
-        compile "org.jetbrains.kotlin:kotlin-reflect"
+        implementation project(':ee-slides:ee-slides_json')
+        implementation project(':ee:tornadoFxBom')
+        implementation "org.jetbrains.kotlin:kotlin-reflect"
     }
 
     jar {
         manifest {
             attributes(
-                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
                     'Main-Class': 'ee.slides.fx.SlidesApp'
             )
         }
-        from configurations.compile.collect { entry -> zipTree(entry) }
+        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
     }
 }
 
 project(':ee-timeline:ee-timeline_des') {
     dependencies {
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-design')
     }
 }
 
 project(':ee-timeline:ee-timeline') {
     dependencies {
-        compile project(':ee:ee-common')
+        implementation project(':ee:ee-common')
     }
 }
 
 project(':ee-timeline:ee-timeline_json') {
     dependencies {
-        compile project(':ee-timeline:ee-timeline')
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
+        implementation project(':ee-timeline:ee-timeline')
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin") {
             exclude module: "kotlin-reflect"
         }
-        compile "org.jetbrains.kotlin:kotlin-reflect"
+        implementation "org.jetbrains.kotlin:kotlin-reflect"
     }
 }
 
 project(':ee-timeline:ee-timeline_excel') {
     dependencies {
-        compile project(':ee-timeline:ee-timeline')
-        compile project(':ee-timeline:ee-timeline_json')
-        compile project(':ee-office:ee-excel')
+        implementation project(':ee-timeline:ee-timeline')
+        implementation project(':ee-timeline:ee-timeline_json')
+        implementation project(':ee-office:ee-excel')
     }
 }
 
@@ -408,99 +407,99 @@ project(':ee-elastic:ee-elastic') {
     mainClassName = "ee.es.ExportMainKt"
 
     dependencies {
-        compile project(':ee:ee-common')
-        compile "org.elasticsearch.client:transport:$version_elasticsearch"
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
+        implementation project(':ee:ee-common')
+        implementation "org.elasticsearch.client:transport:$version_elasticsearch"
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin") {
             exclude module: "kotlin-reflect"
             exclude module: "kotlin-stdlib-jdk7"
         }
-        compile "org.jetbrains.kotlin:kotlin-reflect"
+        implementation "org.jetbrains.kotlin:kotlin-reflect"
     }
 }
 
 project(':ee-office:ee-excel') {
     dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-common')
+        implementation project(':ee:ee-design')
 
-        compile "org.apache.poi:poi-ooxml:$version_ooxml"
+        implementation "org.apache.poi:poi-ooxml:$version_ooxml"
     }
 }
 
 project(':ee-office:ee-msaccess') {
     dependencies {
-        compile project(':ee:ee-common')
-        compile "com.healthmarketscience.jackcess:jackcess:$version_jackcess"
+        implementation project(':ee:ee-common')
+        implementation "com.healthmarketscience.jackcess:jackcess:$version_jackcess"
 
-        testCompile project(':ee:ee-design')
+        testImplementation project(':ee:ee-design')
     }
 }
 
 project(':ee-office:ee-powerpoint') {
     dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee:ee-design')
-        compile project(':ee-slides:ee-slides_json')
-        compile project(':ee-office:ee-translate')
+        implementation project(':ee:ee-common')
+        implementation project(':ee:ee-design')
+        implementation project(':ee-slides:ee-slides_json')
+        implementation project(':ee-office:ee-translate')
 
-        compile "org.apache.poi:poi-ooxml:$version_ooxml"
+        implementation "org.apache.poi:poi-ooxml:$version_ooxml"
     }
 }
 
 project(':ee-office:ee-word') {
     dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-common')
+        implementation project(':ee:ee-design')
 
-        compile "org.apache.poi:poi-ooxml:$version_ooxml"
-        compile "org.apache.poi:poi-scratchpad:$version_poi_scratchpad"
+        implementation "org.apache.poi:poi-ooxml:$version_ooxml"
+        implementation "org.apache.poi:poi-scratchpad:$version_poi_scratchpad"
     }
 }
 
 project(':ee-office:ee-docx4j') {
     dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee-slides:ee-slides_json')
-        compile project(':ee-office:ee-translate')
+        implementation project(':ee:ee-common')
+        implementation project(':ee-slides:ee-slides_json')
+        implementation project(':ee-office:ee-translate')
 
-        compile "org.docx4j:docx4j:$version_docx4j"
-        compile "javax.xml.bind:jaxb-api:$version_jaxb_api"
+        implementation "org.docx4j:docx4j:$version_docx4j"
+        implementation "javax.xml.bind:jaxb-api:$version_jaxb_api"
     }
 }
 
 project(':ee-email:ee-email') {
     dependencies {
-        compile project(':ee:ee-common')
-        compile "javax.mail:javax.mail-api:$version_mail"
+        implementation project(':ee:ee-common')
+        implementation "javax.mail:javax.mail-api:$version_mail"
     }
 }
 
 project(':ee-email:ee-email_des') {
     dependencies {
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-design')
     }
 }
 
 project(':ee-email:ee-email_excel') {
     dependencies {
-        compile project(':ee-email:ee-email')
-        compile project(':ee-office:ee-excel')
+        implementation project(':ee-email:ee-email')
+        implementation project(':ee-office:ee-excel')
     }
 }
 
 project(':ee-office:ee-word') {
     dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-common')
+        implementation project(':ee:ee-design')
 
-        compile "org.apache.poi:poi-ooxml:$version_ooxml"
+        implementation "org.apache.poi:poi-ooxml:$version_ooxml"
     }
 }
 
 project(':ee-office:ee-translate') {
     dependencies {
-        compile project(':ee-office:ee-excel')
-        compile "com.google.cloud:google-cloud-translate:$version_google_cloud"
+        implementation project(':ee-office:ee-excel')
+        implementation "com.google.cloud:google-cloud-translate:$version_google_cloud"
     }
 }
 
@@ -514,21 +513,21 @@ project(':ee-office:ee-translate_fx') {
     }
 
     dependencies {
-        compile project(':ee-office:ee-translate')
-        compile project(':ee-office:ee-docx4j')
-        compile project(':ee:tornadoFxBom')
+        implementation project(':ee-office:ee-translate')
+        implementation project(':ee-office:ee-docx4j')
+        implementation project(':ee:tornadoFxBom')
     }
 }
 
 project(':ee-grab:ee-grab') {
     dependencies {
-        compile project(':ee:ee-common')
-        compile "org.seleniumhq.selenium:selenium-api:$version_selenium"
-        compile "org.seleniumhq.selenium:selenium-firefox-driver:$version_selenium"
-        compile "org.seleniumhq.selenium:selenium-chrome-driver:$version_selenium"
-        compile "org.seleniumhq.selenium:selenium-support:$version_selenium"
-        compile "org.apache.httpcomponents:httpclient"
-        compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
+        implementation project(':ee:ee-common')
+        implementation "org.seleniumhq.selenium:selenium-api:$version_selenium"
+        implementation "org.seleniumhq.selenium:selenium-firefox-driver:$version_selenium"
+        implementation "org.seleniumhq.selenium:selenium-chrome-driver:$version_selenium"
+        implementation "org.seleniumhq.selenium:selenium-support:$version_selenium"
+        implementation "org.apache.httpcomponents:httpclient"
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin") {
             exclude module: "kotlin-reflect"
         }
     }
@@ -537,27 +536,27 @@ project(':ee-grab:ee-grab') {
 
 project(':ee-grab:ee-fiveh') {
     dependencies {
-        compile project(':ee-grab:ee-grab')
-        compile project(':ee-email:ee-email')
+        implementation project(':ee-grab:ee-grab')
+        implementation project(':ee-email:ee-email')
     }
 }
 
 project(':ee-grab:ee-rulit') {
     dependencies {
-        compile project(':ee-grab:ee-grab')
+        implementation project(':ee-grab:ee-grab')
     }
 }
 
 project(':ee-grab:ee-sharepoint') {
     dependencies {
-        compile project(':ee-grab:ee-grab')
+        implementation project(':ee-grab:ee-grab')
     }
 }
 
 
 project(':ee-grab:ee-moodle') {
     dependencies {
-        compile project(':ee-grab:ee-grab')
+        implementation project(':ee-grab:ee-grab')
     }
 }
 
@@ -574,18 +573,18 @@ project(':ee-grab:ee-moodle_fx') {
     mainClassName = 'ee.moodle.fx.MoodleApp'
 
     dependencies {
-        compile project(':ee-grab:ee-moodle')
-        compile project(':ee:tornadoFxBom')
+        implementation project(':ee-grab:ee-moodle')
+        implementation project(':ee:tornadoFxBom')
     }
 
     jar {
         manifest {
             attributes(
-                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
                     'Main-Class': 'ee.moodle.fx.MoodleApp'
             )
         }
-        from configurations.compile.collect { entry -> zipTree(entry) }
+        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
     }
 
     task copyDrivers(type: Copy) {
@@ -606,23 +605,23 @@ project(':ee-grab:ee-moodle_fx') {
 
 project(':ee-grab:ee-unisa') {
     dependencies {
-        compile project(':ee-grab:ee-grab')
+        implementation project(':ee-grab:ee-grab')
     }
 }
 
 project(':ee-grab:ee-brill') {
     dependencies {
-        compile project(':ee-grab:ee-grab')
+        implementation project(':ee-grab:ee-grab')
     }
 }
 
 project(':ee-schkola:ee-schkola') {
     dependencies {
-        compile project(':ee:ee-common')
+        implementation project(':ee:ee-common')
 
-        testCompile project(':ee-grab:ee-fiveh')
-        testCompile project(':ee-office:ee-msaccess')
-        testCompile project(':ee-email:ee-email_excel')
+        testImplementation project(':ee-grab:ee-fiveh')
+        testImplementation project(':ee-office:ee-msaccess')
+        testImplementation project(':ee-email:ee-email_excel')
     }
 }
 
@@ -637,20 +636,20 @@ project(':ee-schkola:ee-schkola_fx') {
     }
 
     dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee:ee-design')
-        compile project(':ee-schkola:ee-schkola')
-        compile project(':ee:tornadoFxBom')
+        implementation project(':ee:ee-common')
+        implementation project(':ee:ee-design')
+        implementation project(':ee-schkola:ee-schkola')
+        implementation project(':ee:tornadoFxBom')
     }
 
     jar {
         manifest {
             attributes(
-                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
                     'Main-Class': 'ee.schkola.fx.app.MyApp'
             )
         }
-        from configurations.compile.collect { entry -> zipTree(entry) }
+        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
     }
 
     mainClassName = "ee.schkola.fx.app.MyApp"
@@ -669,12 +668,12 @@ project(':ee-schkola:ee-schkola_des') {
     }
 
     dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee:ee-design')
-        compile project(':ee:ee-system')
+        implementation project(':ee:ee-common')
+        implementation project(':ee:ee-design')
+        implementation project(':ee:ee-system')
 
-        compile project(':ee:ee-design_swagger')
-        compile project(':ee:ee-design_json')
+        implementation project(':ee:ee-design_swagger')
+        implementation project(':ee:ee-design_json')
     }
 }
 
@@ -688,8 +687,8 @@ project(':ee-schkola:ee-schkola_des_fx') {
     }
 
     dependencies {
-        compile project(':ee-schkola:ee-schkola_des')
-        compile project(':ee:ee-lang_fx')
+        implementation project(':ee-schkola:ee-schkola_des')
+        implementation project(':ee:ee-lang_fx')
     }
 }
 
@@ -697,66 +696,32 @@ project(':ee-schkola:ee-schkola_groovy') {
     apply plugin: "groovy"
 
     dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee-schkola:ee-schkola')
-        compile project(':ee-office:ee-msaccess')
-        compile 'org.codehaus.groovy:groovy-all:2.4.7'
+        implementation project(':ee:ee-common')
+        implementation project(':ee-schkola:ee-schkola')
+        implementation project(':ee-office:ee-msaccess')
+        implementation 'org.codehaus.groovy:groovy-all:2.4.7'
 
-        testCompile project(':ee:ee-design')
+        testImplementation project(':ee:ee-design')
     }
 }
 
 project(':auth:auth-des') {
     dependencies {
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-design')
     }
 }
 
 project(':seminar:seminar-des') {
     dependencies {
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-design')
     }
 }
 
 project(':preachit:preachit-des') {
     dependencies {
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-design')
     }
 }
-
-project(':cg:cg') {
-    dependencies {
-        compile project(':ee:ee-common')
-    }
-}
-project(':cg:cg_des') {
-    dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee:ee-design')
-        compile project(':ee:ee-system')
-    }
-}
-project(':cg:cg_fx') {
-    apply plugin: 'application'
-    mainClassName = 'cg.ee.fx.CgApp'
-
-    dependencies {
-        compile project(':ee:ee-lang_fx')
-        compile project(':cg:cg_des')
-        compile project(':ee:tornadoFxBom')
-    }
-
-    jar {
-        manifest {
-            attributes(
-                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-                    'Main-Class': 'cg.ee.fx.CgApp'
-            )
-        }
-        from configurations.compile.collect { entry -> zipTree(entry) }
-    }
-}
-
 /*
 project(':counter:counter') {
     dependencies {
@@ -765,7 +730,7 @@ project(':counter:counter') {
 
 project(':counter:counter-des') {
     dependencies {
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-design')
     }
 }
 
@@ -777,7 +742,7 @@ project(':auth:auth') {
 
 project(':auth:auth-des') {
     dependencies {
-        compile project(':ee:ee-design')
+        implementation project(':ee:ee-design')
     }
 }
 */
