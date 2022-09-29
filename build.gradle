@@ -312,11 +312,11 @@ project(':ee:ee-lang_fx') {
     jar {
         manifest {
             attributes(
-                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
                     'Main-Class': 'ee.lang.fx.ModelApp'
             )
         }
-        from configurations.compile.collect { entry -> zipTree(entry) }
+        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
     }
 }
 
@@ -363,11 +363,11 @@ project(':ee-slides:ee-slides_fx') {
     jar {
         manifest {
             attributes(
-                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
                     'Main-Class': 'ee.slides.fx.SlidesApp'
             )
         }
-        from configurations.compile.collect { entry -> zipTree(entry) }
+        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
     }
 }
 
@@ -581,11 +581,11 @@ project(':ee-grab:ee-moodle_fx') {
     jar {
         manifest {
             attributes(
-                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
                     'Main-Class': 'ee.moodle.fx.MoodleApp'
             )
         }
-        from configurations.compile.collect { entry -> zipTree(entry) }
+        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
     }
 
     task copyDrivers(type: Copy) {
@@ -646,11 +646,11 @@ project(':ee-schkola:ee-schkola_fx') {
     jar {
         manifest {
             attributes(
-                    'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
                     'Main-Class': 'ee.schkola.fx.app.MyApp'
             )
         }
-        from configurations.compile.collect { entry -> zipTree(entry) }
+        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
     }
 
     mainClassName = "ee.schkola.fx.app.MyApp"
