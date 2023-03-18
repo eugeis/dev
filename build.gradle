@@ -292,34 +292,6 @@ project(':ee:ee-design_task') {
     }
 }
 
-project(':ee:ee-lang_fx') {
-    apply plugin: 'application'
-    if (Jvm.current().toString().startsWith('11')) {
-        apply plugin: "org.openjfx.javafxplugin"
-
-        javafx {
-            modules = ['javafx.controls']
-        }
-    }
-
-    mainClassName = 'ee.lang.fx.ModelApp'
-
-    dependencies {
-        compile project(':ee:ee-design_task')
-        compile project(':ee:tornadoFxBom')
-    }
-
-    jar {
-        manifest {
-            attributes(
-                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
-                    'Main-Class': 'ee.lang.fx.ModelApp'
-            )
-        }
-        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
-    }
-}
-
 project(':ee-slides:ee-slides_des') {
     dependencies {
         compile project(':ee:ee-design')
@@ -339,35 +311,6 @@ project(':ee-slides:ee-slides_json') {
             exclude module: "kotlin-reflect"
         }
         compile "org.jetbrains.kotlin:kotlin-reflect"
-    }
-}
-
-project(':ee-slides:ee-slides_fx') {
-    apply plugin: 'application'
-    if (Jvm.current().toString().startsWith('11')) {
-        apply plugin: "org.openjfx.javafxplugin"
-
-        javafx {
-            modules = ['javafx.controls']
-        }
-    }
-
-    mainClassName = 'ee.slides.fx.SlidesApp'
-
-    dependencies {
-        compile project(':ee-slides:ee-slides_json')
-        compile project(':ee:tornadoFxBom')
-        compile "org.jetbrains.kotlin:kotlin-reflect"
-    }
-
-    jar {
-        manifest {
-            attributes(
-                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
-                    'Main-Class': 'ee.slides.fx.SlidesApp'
-            )
-        }
-        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
     }
 }
 
@@ -504,22 +447,6 @@ project(':ee-office:ee-translate') {
     }
 }
 
-project(':ee-office:ee-translate_fx') {
-    if (Jvm.current().toString().startsWith('11')) {
-        apply plugin: "org.openjfx.javafxplugin"
-
-        javafx {
-            modules = ['javafx.controls']
-        }
-    }
-
-    dependencies {
-        compile project(':ee-office:ee-translate')
-        compile project(':ee-office:ee-docx4j')
-        compile project(':ee:tornadoFxBom')
-    }
-}
-
 project(':ee-grab:ee-grab') {
     dependencies {
         compile project(':ee:ee-common')
@@ -561,49 +488,6 @@ project(':ee-grab:ee-moodle') {
     }
 }
 
-project(':ee-grab:ee-moodle_fx') {
-    apply plugin: 'application'
-    if (Jvm.current().toString().startsWith('11')) {
-        apply plugin: "org.openjfx.javafxplugin"
-
-        javafx {
-            modules = ['javafx.controls']
-        }
-    }
-
-    mainClassName = 'ee.moodle.fx.MoodleApp'
-
-    dependencies {
-        compile project(':ee-grab:ee-moodle')
-        compile project(':ee:tornadoFxBom')
-    }
-
-    jar {
-        manifest {
-            attributes(
-                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
-                    'Main-Class': 'ee.moodle.fx.MoodleApp'
-            )
-        }
-        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
-    }
-
-    task copyDrivers(type: Copy) {
-        from "$buildDir/../../ee-grab/drivers"
-        into "$buildDir/drivers"
-    }
-
-    distributions {
-        main {
-            contents {
-                from(copyDrivers) {
-                    into "drivers"
-                }
-            }
-        }
-    }
-}
-
 project(':ee-grab:ee-unisa') {
     dependencies {
         compile project(':ee-grab:ee-grab')
@@ -626,36 +510,6 @@ project(':ee-schkola:ee-schkola') {
     }
 }
 
-project(':ee-schkola:ee-schkola_fx') {
-    apply plugin: 'application'
-    if (Jvm.current().toString().startsWith('11')) {
-        apply plugin: "org.openjfx.javafxplugin"
-
-        javafx {
-            modules = ['javafx.controls']
-        }
-    }
-
-    dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee:ee-design')
-        compile project(':ee-schkola:ee-schkola')
-        compile project(':ee:tornadoFxBom')
-    }
-
-    jar {
-        manifest {
-            attributes(
-                    'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
-                    'Main-Class': 'ee.schkola.fx.app.MyApp'
-            )
-        }
-        from configurations.runtimeClasspath.collect { entry -> zipTree(entry) }
-    }
-
-    mainClassName = "ee.schkola.fx.app.MyApp"
-}
-
 project(':ee-schkola:ee-schkola_des') {
 
     sourceSets {
@@ -675,21 +529,6 @@ project(':ee-schkola:ee-schkola_des') {
 
         compile project(':ee:ee-design_swagger')
         compile project(':ee:ee-design_json')
-    }
-}
-
-project(':ee-schkola:ee-schkola_des_fx') {
-    if (Jvm.current().toString().startsWith('11')) {
-        apply plugin: "org.openjfx.javafxplugin"
-
-        javafx {
-            modules = ['javafx.controls']
-        }
-    }
-
-    dependencies {
-        compile project(':ee-schkola:ee-schkola_des')
-        compile project(':ee:ee-lang_fx')
     }
 }
 
