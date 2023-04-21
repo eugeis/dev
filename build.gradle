@@ -18,7 +18,6 @@ buildscript {
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
-        classpath "org.openjfx:javafx-plugin:0.0.9"
     }
 }
 
@@ -106,26 +105,6 @@ subprojects {
     task allDeps(type: DependencyReportTask) {}
 }
 
-project(':ee:tornadoFxBom') {
-    if (Jvm.current().toString().startsWith('11')) {
-        apply plugin: "org.openjfx.javafxplugin"
-
-        javafx {
-            modules = ['javafx.controls']
-        }
-    }
-
-    dependencies {
-
-        compile("no.tornado:tornadofx:$version_tornadofx") {
-            exclude module: "kotlin-stdlib-jre8"
-            exclude module: "kotlin-reflect"
-            exclude module: "kotlin-stdlib-jdk7"
-            exclude module: "kotlin-stdlib-jdk8"
-        }
-    }
-}
-
 project(':ee:ee-common_java') {
 }
 
@@ -137,40 +116,6 @@ project(':ee:ee-common') {
         compile "org.jetbrains.kotlinx:kotlinx-coroutines-core"
     }
 }
-
-project(':ee:ee-asm') {
-    if (Jvm.current().toString().startsWith('11')) {
-        apply plugin: "org.openjfx.javafxplugin"
-
-        javafx {
-            modules = ['javafx.controls']
-        }
-    }
-
-    dependencies {
-        compile project(':ee:ee-common')
-        compile "org.ow2.asm:asm:${version_asm}"
-        compile "org.ow2.asm:asm-tree:${version_asm}"
-    }
-}
-
-/*
-project(':ee:ee-axon_example') {
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
-
-    dependencies {
-        compile('org.springframework.boot:spring-boot-starter-data-jpa')
-        compile('org.springframework.boot:spring-boot-starter-jersey')
-        compile('org.springframework.boot:spring-boot-starter-web')
-        runtime('org.hsqldb:hsqldb')
-        compileOnly('org.projectlombok:lombok')
-        testCompile('org.springframework.boot:spring-boot-starter-test')
-        compile("org.axonframework:axon-spring:${version_axon}")
-        testCompile("org.axonframework:axon-test:${version_axon}")
-    }
-}
-*/
 
 project(':ee:ee-lang_item') {
     dependencies {
@@ -191,34 +136,6 @@ project(':ee:ee-design') {
 project(':ee:ee-design_gen') {
     dependencies {
         compile project(':ee:ee-lang')
-    }
-}
-
-project(':ee:ee-design_ui') {
-    dependencies {
-        compile project(':ee:ee-design')
-    }
-}
-
-project(':ee:ee-design_ui_des') {
-    dependencies {
-        compile project(':ee:ee-design')
-        compile project(':ee:ee-asm')
-    }
-}
-
-project(':ee:ee-design_ui_des_asm') {
-    if (Jvm.current().toString().startsWith('11')) {
-        apply plugin: "org.openjfx.javafxplugin"
-
-        javafx {
-            modules = ['javafx.controls']
-        }
-    }
-
-    dependencies {
-        compile project(':ee:ee-design')
-        compile project(':ee:ee-asm')
     }
 }
 
@@ -257,38 +174,6 @@ project(':ee:ee-lang') {
 project(':ee:ee-lang_gen') {
     dependencies {
         compile project(':ee:ee-lang_item')
-    }
-}
-
-project(':ee:ee-task') {
-    dependencies {
-        compile project(':ee:ee-lang')
-    }
-}
-
-project(':ee:ee-task_des') {
-    dependencies {
-        compile project(':ee:ee-design')
-    }
-}
-
-project(':ee:ee-system_des') {
-    dependencies {
-        compile project(':ee:ee-task_des')
-        compile "org.jetbrains.kotlin:kotlin-reflect"
-    }
-}
-
-project(':ee:ee-system') {
-    dependencies {
-        compile project(':ee:ee-task')
-    }
-}
-
-project(':ee:ee-design_task') {
-    dependencies {
-        compile project(':ee:ee-design')
-        compile project(':ee:ee-system')
     }
 }
 
@@ -525,23 +410,9 @@ project(':ee-schkola:ee-schkola_des') {
     dependencies {
         compile project(':ee:ee-common')
         compile project(':ee:ee-design')
-        compile project(':ee:ee-system')
 
         compile project(':ee:ee-design_swagger')
         compile project(':ee:ee-design_json')
-    }
-}
-
-project(':ee-schkola:ee-schkola_groovy') {
-    apply plugin: "groovy"
-
-    dependencies {
-        compile project(':ee:ee-common')
-        compile project(':ee-schkola:ee-schkola')
-        compile project(':ee-office:ee-msaccess')
-        compile 'org.codehaus.groovy:groovy-all:2.4.7'
-
-        testCompile project(':ee:ee-design')
     }
 }
 
